@@ -15,7 +15,7 @@ function Home() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {teslaData.map((data) => (
+        {/* {teslaData.map((data) => (
           <Marker
             key={data.id}
             position={[data.gps.latitude, data.gps.longitude]}
@@ -25,7 +25,7 @@ function Home() {
               <p>{data.address.street}</p>
             </Popup>
           </Marker>
-        ))}
+        ))} */}
       </MapContainer>
     </>
   );
