@@ -5,17 +5,20 @@ import teslaData from "../data/teslaData.json";
 import Navbar from "../components/Navbar";
 
 function Home() {
+  // const [status, setState] = React.useState(false);
+  // const [text, setText] = React.useState("");
   console.log(teslaData);
   return (
     <>
-      <Navbar />
+      <div className="home_container">
+        <Navbar />
 
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* {teslaData.map((data) => (
+        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {teslaData.map((data) => (
           <Marker
             key={data.id}
             position={[data.gps.latitude, data.gps.longitude]}
@@ -25,8 +28,9 @@ function Home() {
               <p>{data.address.street}</p>
             </Popup>
           </Marker>
-        ))} */}
-      </MapContainer>
+        ))}
+        </MapContainer>
+      </div>
     </>
   );
 }

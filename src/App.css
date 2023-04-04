@@ -59,3 +59,8 @@
 .leaflet-left{
 margin-top: 80vh;
 } 
+
+
+.home_container{
+  /* filter: blur(50px); */
+}
