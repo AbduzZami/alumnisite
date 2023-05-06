@@ -38,29 +38,16 @@
 }
 
 
-.leaflet-container{
+.leaflet-container {
   width: 100vw;
   height: 100vh;
   position: absolute;
   overflow: hidden;
 }
 
-.navbar{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #fff;
-  z-index: 1000;
+
+
+.leaflet-left {
+  margin-top: 80vh;
 }
 
-
-.leaflet-left{
-margin-top: 80vh;
-} 
-
-
-.home_container{
-  /* filter: blur(50px); */
-}
