@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import teslaData from "../data/teslaData.json";
 import Navbar from "../components/Navbar";
+import NewsCard from "../components/NewsCard";
+import TheLatestCard from "../components/TheLatestCard";
+import Footer from "../components/Footer";
 
 function Home() {
   // const [status, setState] = React.useState(false);
@@ -92,24 +95,52 @@ function Home() {
         </div>
         {/* carousel end */}
 
-        <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 ...">
+        <div class="grid grid-flow-row-dense grid-cols-3 ...">
           <div class="col-span-3 md:col-span-1">
-            <h3 className="underline underline-offset-8">Top News</h3>
-            
+            <h3>Top News</h3>
+            <hr
+              style={{
+                background: "black",
+                // color: "black",
+                // borderColor: "lime",
+                height: "1px",
+                margin: "5px",
+              }}
+            />
+
+            <NewsCard />
+            <NewsCard />
+            <NewsCard />
+            <NewsCard />
+
+            <div className="m-2">
+              <button className="btn btn-block btn-outline">See More</button>
+            </div>
           </div>
           <div class="col-span-3 md:col-span-2">
-            <h3 className="underline underline-offset-8">The Latest</h3>
+            <h3>The Latest</h3>
+            <hr
+              style={{
+                background: "black",
+                // color: "black",
+                // borderColor: "lime",
+                height: "1px",
+                margin: "5px",
+              }}
+            />
+            <TheLatestCard />
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center">
+        {/* <div className="flex flex-wrap justify-center">
           <div>*</div>
           <div>*</div>
           <div>*</div>
           <div>*</div>
           <div>*</div>
-        </div>
+        </div> */}
       </div>
+      <Footer />
     </>
   );
 }
