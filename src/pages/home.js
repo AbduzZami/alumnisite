@@ -92,9 +92,22 @@ function Home() {
         </div>
         {/* carousel end */}
 
-        <div class="grid grid-rows-3 grid-flow-col gap-4">
-          <div class="row-span-3 ...">01</div>
-          <div class="row-span-2 ...">02</div>
+        <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 ...">
+          <div class="col-span-3 md:col-span-1">
+            <h3 className="underline underline-offset-8">Top News</h3>
+            
+          </div>
+          <div class="col-span-3 md:col-span-2">
+            <h3 className="underline underline-offset-8">The Latest</h3>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap justify-center">
+          <div>*</div>
+          <div>*</div>
+          <div>*</div>
+          <div>*</div>
+          <div>*</div>
         </div>
       </div>
     </>
