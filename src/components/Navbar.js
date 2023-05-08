@@ -2,152 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 function Navbar() {
-  let persons = [
-    {
-      name: "John",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Modu",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Arif",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "John",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Modu",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Arif",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "John",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Modu",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-    {
-      name: "Arif",
-      batch: "19",
-      dept: "CSE",
-      work: "Bugijugi",
-      location: {
-        latitude: 23.56,
-        longitude: 90.91,
-        address: "51 Abduz Zami Street",
-      },
-      email: "abzm",
-      phone: "00000",
-      linkedin: "aaa",
-      facebook: "aafdd",
-      twitter: "sadada",
-    },
-  ];
   return (
     <>
       <div className="navbar bg-base-100">
@@ -174,14 +28,15 @@ function Navbar() {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Item 2</a>
+                <Link to="/">Home</Link>
               </li>
 
               <li>
-                <a>Item 3</a>
+                <Link to="/community">Community</Link>
+              </li>
+
+              <li>
+                <Link to="/newsevents">News & Events</Link>
               </li>
             </ul>
           </div>
@@ -190,13 +45,36 @@ function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 1</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a>Item 2</a>
+              <Link to="/community">Community</Link>
             </li>
+            <li className="relative z-0" tabIndex={0}>
+              <a>
+                Parent
+                <svg
+                  className="fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                </svg>
+              </a>
+              <ul className="bg-base-200 p-2">
+                <li>
+                  <a>Submenu 1</a>
+                </li>
+                <li>
+                  <a>Submenu 2</a>
+                </li>
+              </ul>
+            </li>
+
             <li>
-              <a>Item 3</a>
+              <Link to="/newsevents">News & Events</Link>
             </li>
           </ul>
         </div>
