@@ -50,7 +50,7 @@ function Navbar() {
             <li>
               <Link to="/community">Community</Link>
             </li>
-            <li className="relative z-0" tabIndex={0}>
+            {/* <li className="relative z-0" tabIndex={0}>
               <a>
                 Parent
                 <svg
@@ -71,7 +71,7 @@ function Navbar() {
                   <a>Submenu 2</a>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
             <li>
               <Link to="/newsevents">News & Events</Link>
@@ -80,8 +80,12 @@ function Navbar() {
         </div>
 
         <div className="navbar-end">
-          <button className="btn btn-outline m-1">SIGN IN</button>
-          <button className="btn m-1">SIGN UP</button>
+          <Link to={"/signin"}>
+            <button className="btn btn-outline m-1">SIGN IN</button>
+          </Link>
+          <Link to={"/signup"}>
+            <button className="btn btn-outline m-1">SIGN UP</button>
+          </Link>
         </div>
       </div>
     </>

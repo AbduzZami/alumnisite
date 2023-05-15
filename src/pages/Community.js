@@ -1,30 +1,35 @@
 import React from "react";
 import CommunityCard from "../components/CommunityCard";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 function Community() {
   return (
     <div>
+      <Navbar />
       <div className="container mx-auto mb-5">
-        <div className="flex flex-wrap gap-4 m-5 justify-center">
-          {/* select start */}
-          <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              Who shot first?
-            </option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
-          </select>
-          {/* select end */}
+        <form action="#">
+          <div className="flex flex-wrap gap-4 m-5 justify-center">
+            {/* select start */}
+            {/* <select className="select select-bordered w-full max-w-xs">
+              <option disabled selected value="byname">
+                Who shot first?
+              </option>
+              <option value="byroll">Han Solo</option>
+              <option value="bywork">Greedo</option>
+            </select> */}
+            {/* select end */}
 
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full max-w-xs"
-          />
+            <input
+              type="text"
+              name="searchfor"
+              placeholder="Type here"
+              className="input input-bordered w-full max-w-xs"
+            />
 
-          <button className="btn">Search</button>
-        </div>
+            <button className="btn">Search</button>
+          </div>
+        </form>
         <hr
           style={{
             background: "black",

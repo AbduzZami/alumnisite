@@ -6,12 +6,14 @@ import teslaData from "../data/teslaData.json";
 import NewsCard from "../components/NewsCard";
 import TheLatestCard from "../components/TheLatestCard";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 function Home() {
   // const [status, setState] = React.useState(false);
   // const [text, setText] = React.useState("");
   return (
     <>
+      <Navbar />
       <div className="container mx-auto">
         {/* 
         <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
@@ -62,10 +64,7 @@ function Home() {
                     architecto eius quis quibusdam fugiat dicta.
                   </p>
 
-                  <a
-                    href="#"
-                    class="mt-8 inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-                  >
+                  <a href="#" class="mt-8 btn">
                     Get in Touch
                   </a>
                 </div>

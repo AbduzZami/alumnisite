@@ -9,18 +9,23 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Community from "./pages/Community";
 import Navbar from "./components/Navbar";
+import NewsEventDetails from "./pages/NewsEventDetails";
+import Error from "./pages/Error";
+import PostNews from "./pages/PostNews";
 
 function App() {
   return (
     <div>
-      <Navbar />
       <Routes>
+        <Route path="*" element={<Error />} />
         <Route path="/" element={<Home />} />
         <Route path="/community" element={<Community />} />
         <Route path="/newsevents" element={<NewsEvents />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/newsevents/:id" element={<NewsEventDetails />} />
+        <Route path="/newsevents/post" element={<PostNews />} />
       </Routes>
     </div>
   );

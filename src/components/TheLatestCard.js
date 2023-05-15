@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function TheLatestCard() {
   return (
-    <div>
+    <Link to="/newsevents/1">
       <article class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
         <img
           alt="Office"
@@ -25,10 +26,7 @@ function TheLatestCard() {
             atque dignissimos. Molestias explicabo corporis voluptatem?
           </p>
 
-          <a
-            href="#"
-            class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600"
-          >
+          <div class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600">
             Find out more
             <span
               aria-hidden="true"
@@ -36,10 +34,10 @@ function TheLatestCard() {
             >
               &rarr;
             </span>
-          </a>
+          </div>
         </div>
       </article>
-    </div>
+    </Link>
   );
 }
 
