@@ -41,14 +41,14 @@ function CommunityCard() {
 
           <dl class="mt-6 flex gap-4 sm:gap-6">
             <div class="flex flex-col-reverse">
-              <dt class="text-sm font-medium text-gray-600">Published</dt>
-              <dd class="text-xs text-gray-500">31st June, 2021</dd>
+              <dt class="text-sm font-medium text-gray-600">Session</dt>
+              <dd class="text-xs text-gray-500">2019-2020</dd>
             </div>
 
-            <div class="flex flex-col-reverse">
+            {/* <div class="flex flex-col-reverse">
               <dt class="text-sm font-medium text-gray-600">Reading time</dt>
               <dd class="text-xs text-gray-500">3 minute</dd>
-            </div>
+            </div> */}
           </dl>
         </div>
       </div>

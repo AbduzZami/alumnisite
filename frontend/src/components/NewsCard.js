@@ -14,8 +14,10 @@ function NewsCard() {
             />
           </figure>
           <div className="m-2 truncate ">
-            <h2 className="font-bold">New movie is released!</h2>
-            <p>Click the button to watch on Jetflix app.</p>
+            <h2 className="font-bold">Alumni get together coming soon!</h2>
+            <p>
+              This was discussed on the board meeting with VC on 2022-Jan-18
+            </p>
             {/* <div className="card-actions justify-end">
                   <button className="btn btn-primary">Watch</button>
                 </div> */}

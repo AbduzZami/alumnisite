@@ -53,8 +53,7 @@ function Home() {
 
                 <div class="p-8 sm:p-16 lg:p-24">
                   <h2 class="text-2xl font-bold sm:text-3xl">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Tempore, debitis.
+                    Welcome to RUET alumni association
                   </h2>
 
                   <p class="mt-4 text-gray-600">

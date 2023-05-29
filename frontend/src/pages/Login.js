@@ -35,8 +35,7 @@ function Login() {
               </h2>
 
               <p class="mt-4 leading-relaxed text-white/90">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                Get connected with your fellow RUETians. Ask for help, share your knowledge, and stay updated with the latest news and events. Join the RUETians community today! 
               </p>
             </div>
           </section>

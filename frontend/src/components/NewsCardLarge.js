@@ -15,17 +15,14 @@ function NewsCardLarge() {
           <div class="p-4 sm:p-6">
             <a href="#">
               <h3 class="text-lg font-medium text-gray-900">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Alumni get together coming soon!
               </h3>
             </a>
 
             <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Recusandae dolores, possimus pariatur animi temporibus nesciunt
-              praesentium dolore sed nulla ipsum eveniet corporis quidem,
-              mollitia itaque minus soluta, voluptates neque explicabo tempora
-              nisi culpa eius atque dignissimos. Molestias explicabo corporis
-              voluptatem?
+              This was discussed on the board meeting with VC on 2022-Jan-18. We
+              are planning to arrange a get together for all the alumni of RUET.
+              We will be sending out invitations soon. Stay tuned!
             </p>
 
             <a
