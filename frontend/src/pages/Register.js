@@ -1,25 +1,72 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 function Register() {
+  async function registerUser(user_name, email, password, roll_no) {
+    try {
+      axios({
+        method: "post",
+        url: "/register",
+        baseURL: "http://localhost:8800",
+        data: {
+          user_name: user_name,
+          email: email,
+          password: password,
+          roll_no: roll_no,
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          alert("User Registered Successfully");
+          // navigate to home
+          // navigate("/");
+        }
+      });
+
+      // const response = await api.post(
+      //   "/register",
+      //   {
+      //     user_name: user_name,
+      //     email: email,
+      //     password: password,
+      //     roll_no: roll_no,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+      // console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const [user_name, setUserName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [roll_no, setRollNo] = React.useState("");
+
   return (
     <>
       {/* <Navbar /> */}
 
-      <section class="bg-white">
-        <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-          <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+      <section className="bg-white">
+        <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+          <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <img
               alt="Night"
               src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              class="absolute inset-0 h-full w-full object-cover opacity-80"
+              className="absolute inset-0 h-full w-full object-cover opacity-80"
             />
 
-            <div class="hidden lg:relative lg:block lg:p-12">
-              <a class="block text-white" href="/">
-                <span class="sr-only">Home</span>
+            <div className="hidden lg:relative lg:block lg:p-12">
+              <a className="block text-white" href="/">
+                <span className="sr-only">Home</span>
                 <svg
-                  class="h-8 sm:h-10"
+                  className="h-8 sm:h-10"
                   viewBox="0 0 28 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -31,11 +78,11 @@ function Register() {
                 </svg>
               </a>
 
-              <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+              <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
                 Welcome to RUETians 🦑
               </h2>
 
-              <p class="mt-4 leading-relaxed text-white/90">
+              <p className="mt-4 leading-relaxed text-white/90">
                 Get connected with your fellow RUETians. Ask for help, share
                 your knowledge, and stay updated with the latest news and
                 events. Join the RUETians community today!
@@ -45,17 +92,17 @@ function Register() {
 
           <main
             aria-label="Main"
-            class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+            className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
           >
-            <div class="max-w-xl lg:max-w-3xl">
-              <div class="relative -mt-16 block lg:hidden">
+            <div className="max-w-xl lg:max-w-3xl">
+              <div className="relative -mt-16 block lg:hidden">
                 <a
-                  class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
+                  className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
                   href="/"
                 >
-                  <span class="sr-only">Home</span>
+                  <span className="sr-only">Home</span>
                   <svg
-                    class="h-8 sm:h-10"
+                    className="h-8 sm:h-10"
                     viewBox="0 0 28 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,53 +114,55 @@ function Register() {
                   </svg>
                 </a>
 
-                <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+                <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                   Welcome to Squid 🦑
                 </h1>
 
-                <p class="mt-4 leading-relaxed text-gray-500">
+                <p className="mt-4 leading-relaxed text-gray-500">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
                 </p>
               </div>
 
-              <form action="#" class="mt-8 grid grid-cols-6 gap-6">
-                <div class="col-span-6 sm:col-span-3">
+              <form action="/" className="mt-8 grid grid-cols-6 gap-6">
+                <div className="col-span-6">
                   <label
-                    for="FirstName"
-                    class="block text-sm font-medium text-gray-700"
+                    htmlFor="Name"
+                    className="block text-sm font-medium text-gray-700"
                   >
-                    First Name
+                    Name
                   </label>
 
                   <input
                     type="text"
-                    id="FirstName"
-                    name="first_name"
-                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                    id="Name"
+                    name="name"
+                    onChange={(e) => setUserName(e.target.value)}
+                    className="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
+                <div className="col-span-6">
                   <label
-                    for="LastName"
-                    class="block text-sm font-medium text-gray-700"
+                    htmlFor="Roll"
+                    className="block text-sm font-medium text-gray-700"
                   >
-                    Last Name
+                    Roll
                   </label>
 
                   <input
                     type="text"
-                    id="LastName"
-                    name="last_name"
-                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                    id="Roll"
+                    name="roll"
+                    onChange={(e) => setRollNo(e.target.value)}
+                    className="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6">
+                <div className="col-span-6">
                   <label
-                    for="Email"
-                    class="block text-sm font-medium text-gray-700"
+                    htmlFor="Email"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     Email
                   </label>
@@ -122,14 +171,15 @@ function Register() {
                     type="email"
                     id="Email"
                     name="email"
-                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-3">
                   <label
-                    for="Password"
-                    class="block text-sm font-medium text-gray-700"
+                    htmlFor="Password"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     Password
                   </label>
@@ -138,14 +188,15 @@ function Register() {
                     type="password"
                     id="Password"
                     name="password"
-                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-3">
                   <label
-                    for="PasswordConfirmation"
-                    class="block text-sm font-medium text-gray-700"
+                    htmlFor="PasswordConfirmation"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     Password Confirmation
                   </label>
@@ -154,46 +205,54 @@ function Register() {
                     type="password"
                     id="PasswordConfirmation"
                     name="password_confirmation"
-                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
-                <div class="col-span-6">
-                  <label for="MarketingAccept" class="flex gap-4">
+                <div className="col-span-6">
+                  <label htmlFor="MarketingAccept" className="flex gap-4">
                     <input
                       type="checkbox"
                       id="MarketingAccept"
                       name="marketing_accept"
-                      class="h-5 w-5 h-10 border rounded-md border-gray-400 bg-white shadow-sm"
+                      className="h-5 w-5 h-10 border rounded-md border-gray-400 bg-white shadow-sm"
                     />
 
-                    <span class="text-sm text-gray-700">
+                    <span className="text-sm text-gray-700">
                       I want to receive emails about events, product updates and
                       company announcements.
                     </span>
                   </label>
                 </div>
 
-                <div class="col-span-6">
-                  <p class="text-sm text-gray-500">
+                <div className="col-span-6">
+                  <p className="text-sm text-gray-500">
                     By creating an account, you agree to our
-                    <a href="#" class="text-gray-700 underline">
+                    <a href="#" className="text-gray-700 underline">
                       terms and conditions
                     </a>
                     and
-                    <a href="#" class="text-gray-700 underline">
+                    <a href="#" className="text-gray-700 underline">
                       privacy policy
                     </a>
                     .
                   </p>
                 </div>
 
-                <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button class="btn">Create an account</button>
+                <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+                  <button
+                    className="btn"
+                    onClick={() =>
+                      registerUser(user_name, email, password, roll_no)
+                    }
+                  >
+                    Create an account
+                  </button>
 
-                  <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                  <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Already have an account?
-                    <a href="#" class="text-gray-700 underline">
+                    <a href="#" className="text-gray-700 underline">
                       Log in
                     </a>
                     .

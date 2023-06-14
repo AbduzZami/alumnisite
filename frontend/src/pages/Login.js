@@ -1,7 +1,50 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  async function loginUser(email, password) {
+    try {
+      axios({
+        method: "post",
+        url: "/login",
+        baseURL: "http://localhost:8800",
+        data: {
+          email: email,
+          password: password,
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res);
+          alert("User Loggedin Successfully");
+          // navigate to home
+          // navigate("/");
+        }
+      });
+
+      // const response = await api.post(
+      //   "/register",
+      //   {
+      //     user_name: user_name,
+      //     email: email,
+      //     password: password,
+      //     roll_no: roll_no,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+      // console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   return (
     <>
       {/* <Navbar /> */}
@@ -35,7 +78,9 @@ function Login() {
               </h2>
 
               <p class="mt-4 leading-relaxed text-white/90">
-                Get connected with your fellow RUETians. Ask for help, share your knowledge, and stay updated with the latest news and events. Join the RUETians community today! 
+                Get connected with your fellow RUETians. Ask for help, share
+                your knowledge, and stay updated with the latest news and
+                events. Join the RUETians community today!
               </p>
             </div>
           </section>
@@ -74,7 +119,7 @@ function Login() {
                 </p>
               </div>
 
-              <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+              <form action="/" class="mt-8 grid grid-cols-6 gap-6">
                 <div class="col-span-6">
                   <label
                     for="Email"
@@ -87,6 +132,7 @@ function Login() {
                     type="email"
                     id="Email"
                     name="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -103,12 +149,18 @@ function Login() {
                     type="password"
                     id="Password"
                     name="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
 
                 <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button class="btn">Sign In</button>
+                  <button
+                    class="btn"
+                    onClick={() => loginUser(email, password)}
+                  >
+                    Sign In
+                  </button>
 
                   <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                     Don't have an account?

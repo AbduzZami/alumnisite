@@ -4,9 +4,12 @@ var connection = require("../connection.js");
 
 router.get("/", async (req, res) => {
   try {
-    connection.query("select * from user", function (error, results, fields) {
+    connection.query("select * from users", function (error, results, fields) {
       if (error) {
-        res.status(500).send("Internal server error");
+        res.status(500).json({
+          message: error.sqlMessage,
+          data: null,
+        });
       } else {
         res.status(200).json({
           message: "Success",
@@ -16,7 +19,10 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal server error");
+    res.status(500).json({
+      message: error.sqlMessage,
+      data: null,
+    });
   }
 });
 
