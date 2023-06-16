@@ -5,12 +5,17 @@ var connection = require("./connection.js");
 const getAllUsers = require("./routes/get_all_users");
 const registerUser = require("./routes/register_user");
 const loginUser = require("./routes/login_user");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: "./.env" });
 
 const app = express();
-const port = 8800;
+const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// app.set("view engine", "hbs");
 
 app.use("/users", getAllUsers);
 app.use("/register", registerUser);
