@@ -6,14 +6,23 @@ const getAllUsers = require("./routes/get_all_users");
 const registerUser = require("./routes/register_user");
 const loginUser = require("./routes/login_user");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: "./.env" });
 
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+// app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // app.set("view engine", "hbs");
 

@@ -2,47 +2,11 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 
-function Login() {
-  async function loginUser(email, password) {
-    try {
-      axios({
-        method: "post",
-        url: "/login",
-        baseURL: "http://localhost:8800",
-        data: {
-          email: email,
-          password: password,
-        },
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          console.log(res);
-          alert("User Loggedin Successfully");
-          // navigate to home
-          // navigate("/");
-        }
-      });
-
-      // const response = await api.post(
-      //   "/register",
-      //   {
-      //     user_name: user_name,
-      //     email: email,
-      //     password: password,
-      //     roll_no: roll_no,
-      //   },
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
-      // console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+function LoginPage() {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
@@ -155,10 +119,7 @@ function Login() {
                 </div>
 
                 <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button
-                    class="btn"
-                    onClick={() => loginUser(email, password)}
-                  >
+                  <button class="btn" onClick={() => login(email, password)}>
                     Sign In
                   </button>
 
@@ -179,4 +140,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

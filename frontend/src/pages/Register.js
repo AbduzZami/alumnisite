@@ -1,48 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
 
-function Register() {
-  async function registerUser(user_name, email, password, roll_no) {
-    try {
-      axios({
-        method: "post",
-        url: "/register",
-        baseURL: "http://localhost:8800",
-        data: {
-          user_name: user_name,
-          email: email,
-          password: password,
-          roll_no: roll_no,
-        },
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          alert("User Registered Successfully");
-          // navigate to home
-          // navigate("/");
-        }
-      });
+function RegisterPage() {
+  const { register } = useContext(AuthContext);
 
-      // const response = await api.post(
-      //   "/register",
-      //   {
-      //     user_name: user_name,
-      //     email: email,
-      //     password: password,
-      //     roll_no: roll_no,
-      //   },
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
-      // console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
   const [user_name, setUserName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -244,7 +207,7 @@ function Register() {
                   <button
                     className="btn"
                     onClick={() =>
-                      registerUser(user_name, email, password, roll_no)
+                      register(user_name, email, password, roll_no)
                     }
                   >
                     Create an account
@@ -267,4 +230,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterPage;
