@@ -1,7 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 
 function Navbar() {
+  const { currentUser } = useContext(AuthContext);
   return (
     <>
       <div className="navbar bg-base-100">
@@ -50,28 +53,6 @@ function Navbar() {
             <li>
               <Link to="/community">Community</Link>
             </li>
-            {/* <li className="relative z-0" tabIndex={0}>
-              <a>
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </a>
-              <ul className="bg-base-200 p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li> */}
 
             <li>
               <Link to="/newsevents">News & Events</Link>
@@ -79,14 +60,65 @@ function Navbar() {
           </ul>
         </div>
 
-        <div className="navbar-end">
-          <Link to={"/signin"}>
-            <button className="btn btn-outline m-1">SIGN IN</button>
-          </Link>
-          <Link to={"/signup"}>
-            <button className="btn btn-outline m-1">SIGN UP</button>
-          </Link>
-        </div>
+        {
+          // if user is logged in
+          currentUser ? (
+            <div className="navbar-end">
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  className="m-1 btn btn-ghost btn-md rounded-btn"
+                >
+                  <div className="avatar">
+                    <div className="rounded-full w-10 h-10 m-1">
+                      <img src="https://i.pravatar.cc/500?img=32" />
+                    </div>
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/settings">Settings</Link>
+                  </li>
+                  <li>
+                    <Link to="/logout">Logout</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div className="navbar-end">
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  className="m-1 btn btn-ghost btn-sm rounded-btn"
+                >
+                  <div className="avatar">
+                    <div className="rounded-full w-10 h-10 m-1">
+                      <img src="https://i.pravatar.cc/500?img=32" />
+                    </div>
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">Register</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )
+        }
       </div>
     </>
   );
