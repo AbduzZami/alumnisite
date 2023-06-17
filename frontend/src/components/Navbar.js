@@ -80,7 +80,7 @@ function Navbar() {
                   className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <Link to="/profile">Profile</Link>
+                    <Link to={`/profile/${currentUser.user_id}`}>Profile</Link>
                   </li>
                   <li>
                     <Link to="/settings">Settings</Link>
@@ -93,29 +93,12 @@ function Navbar() {
             </div>
           ) : (
             <div className="navbar-end">
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  className="m-1 btn btn-ghost btn-sm rounded-btn"
-                >
-                  <div className="avatar">
-                    <div className="rounded-full w-10 h-10 m-1">
-                      <img src="https://i.pravatar.cc/500?img=32" />
-                    </div>
-                  </div>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link to="/register">Register</Link>
-                  </li>
-                </ul>
-              </div>
+              <Link to={"/signin"}>
+                <button className="btn btn-outline m-1">SIGN IN</button>
+              </Link>
+              <Link to={"/signup"}>
+                <button className="btn btn-outline m-1">SIGN UP</button>
+              </Link>
             </div>
           )
         }
