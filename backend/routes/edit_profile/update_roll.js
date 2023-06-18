@@ -7,14 +7,7 @@ const connection = require("../../connection");
 router.patch("/", async (req, res) => {
   const roll_no = req.body.roll_no;
 
-  if (
-    user_id === undefined ||
-    roll_no === undefined ||
-    user_id === "" ||
-    roll_no === "" ||
-    user_id === null ||
-    roll_no === null
-  ) {
+  if (roll_no === undefined || roll_no === "" || roll_no === null) {
     res.status(500).json({
       message: "Invalid request",
     });
