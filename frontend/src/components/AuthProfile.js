@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
-function AuthProfile() {
+import axios from "axios";
+
+function AuthProfile(props) {
+  const [name, setName] = useState("");
+
+  console.log(name);
+
+  async function handleUpdateName() {
+    try {
+      await axios({
+        method: "patch",
+        url: "/edit_profile/update_name",
+        baseURL: "http://localhost:8800",
+        data: {
+          user_name: name,
+        },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div>
       <div className="container mx-auto my-10">
@@ -9,8 +34,13 @@ function AuthProfile() {
           <div className="md:w-4/6 mr-10">
             <section>
               <div className="flex flex-wrap">
-                <p className="font-bold text-2xl">Abduz Zami</p>
-                <button className="btn btn-circle btn-xs ml-2">
+                <p className="font-bold text-2xl">
+                  {props.user_data.user_name}
+                </p>
+                <button
+                  className="btn btn-circle btn-xs ml-2"
+                  onClick={() => window.my_modal_2.showModal()}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -25,9 +55,34 @@ function AuthProfile() {
                     <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
                   </svg>
                 </button>
+
+                <dialog id="my_modal_2" className="modal">
+                  <form method="dialog" className="modal-box">
+                    <h3 className="font-bold text-lg">Hello!</h3>
+                    <p className="py-4">
+                      <input
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                        type="text"
+                        className="w-80 input w-full input-bordered"
+                        placeholder="Update Name"
+                      />
+                      <button
+                        onClick={handleUpdateName}
+                        className="ml-5 btn btn-success"
+                      >
+                        Update
+                      </button>
+                    </p>
+                  </form>
+                  <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                  </form>
+                </dialog>
               </div>
               <div className="flex flex-wrap">
-                <p className="text-lg">1903158</p>
+                <p className="text-lg">{props.user_data.roll_no}</p>
                 <button className="btn btn-circle btn-xs ml-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +102,7 @@ function AuthProfile() {
             </section>
 
             <section className="mt-5">
-              <div className="flex flex-wrap">
+              <div className="flex justify-between flex-wrap">
                 <p className="font-bold">Work</p>
                 <p className="font-bold">[Add]</p>
               </div>
@@ -74,7 +129,7 @@ function AuthProfile() {
             </section>
 
             <section className="mt-5">
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap justify-between">
                 <p className="font-bold">Education</p>
                 <p className="font-bold">[Add]</p>
               </div>

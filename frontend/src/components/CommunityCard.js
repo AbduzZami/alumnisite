@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function CommunityCard(props) {
   return (
-    <Link to="/profile/1">
+    <Link to={`/profile/${props.user_id}`}>
       <div className="w-full">
         <div class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
           <span class="absolute inset-x-0 bottom-0 h-2 bg-black"></span>

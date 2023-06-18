@@ -78,6 +78,7 @@ function Community() {
                   <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
                     <CommunityCard
                       key={alumni.user_id}
+                      user_id={alumni.user_id}
                       name={alumni.user_name}
                       roll_no={alumni.roll_no}
                       headline={alumni.headline}

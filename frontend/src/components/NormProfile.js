@@ -1,14 +1,14 @@
 import React from "react";
 
-function NormProfile() {
+function NormProfile(props) {
   return (
     <div>
       <div className="container mx-auto my-10">
         <div className="flex flex-col-reverse md:flex-row mx-5">
           <div className="md:w-4/6 mr-10">
             <section>
-              <p className="font-bold text-2xl">Abduz Zami</p>
-              <p className="text-lg">1903158</p>
+              <p className="font-bold text-2xl">{props.user_data.user_name}</p>
+              <p className="text-lg">{props.user_data.roll_no}</p>
             </section>
 
             <section className="mt-5">

@@ -5,17 +5,9 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.patch("/", async (req, res) => {
-  const user_id = req.body.user_id;
   const user_name = req.body.user_name;
 
-  if (
-    user_id === undefined ||
-    user_name === undefined ||
-    user_id === "" ||
-    user_name === "" ||
-    user_id === null ||
-    user_name === null
-  ) {
+  if (user_name === undefined || user_name === "" || user_name === null) {
     res.status(500).json({
       message: "Invalid request",
     });

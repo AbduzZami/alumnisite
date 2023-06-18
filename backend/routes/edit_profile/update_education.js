@@ -4,23 +4,27 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
-router.post("/", async (req, res) => {
-  const company = req.body.company;
-  const designation = req.body.designation;
+router.patch("/", async (req, res) => {
+  const edu_id = req.body.edu_id;
+  const institute = req.body.institute;
+  const degree = req.body.degree;
   const start_year = req.body.start_year;
   const end_year = req.body.end_year;
 
   if (
-    company === undefined ||
-    designation === undefined ||
+    edu_id === undefined ||
+    institute === undefined ||
+    degree === undefined ||
     start_year === undefined ||
     end_year === undefined ||
-    company === "" ||
-    designation === "" ||
+    edu_id === "" ||
+    institute === "" ||
+    degree === "" ||
     start_year === "" ||
     end_year === "" ||
-    company === null ||
-    designation === null ||
+    edu_id === null ||
+    institute === null ||
+    degree === null ||
     start_year === null ||
     end_year === null
   ) {
@@ -46,28 +50,18 @@ router.post("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `insert into works ( user_id, company, designation, start_year, end_year ) values ?`;
-
-        var values = [
-          [
-            decoded.user_id,
-            req.body.company,
-            req.body.designation,
-            req.body.start_year,
-            req.body.end_year,
-          ],
-        ];
+        var sql = `update educations set institute = '${institute}' , degree = '${degree}' , start_year = '${start_year}', end_year = '${end_year}' where educations.edu_id = ${edu_id} and educations.user_id = ${decoded.user_id}`;
 
         console.log(req.body);
 
-        connection.query(sql, [values], function (error, result, fields) {
+        connection.query(sql, function (error, result, fields) {
           if (error) {
             res.status(500).json({
               message: error.sqlMessage,
             });
           } else {
             res.status(200).json({
-              message: "Work added successfully",
+              message: "Education updated successfully",
             });
           }
         });

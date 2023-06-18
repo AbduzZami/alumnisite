@@ -5,22 +5,22 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.post("/", async (req, res) => {
-  const company = req.body.company;
-  const designation = req.body.designation;
+  const institute = req.body.institute;
+  const degree = req.body.degree;
   const start_year = req.body.start_year;
   const end_year = req.body.end_year;
 
   if (
-    company === undefined ||
-    designation === undefined ||
+    institute === undefined ||
+    degree === undefined ||
     start_year === undefined ||
     end_year === undefined ||
-    company === "" ||
-    designation === "" ||
+    institute === "" ||
+    degree === "" ||
     start_year === "" ||
     end_year === "" ||
-    company === null ||
-    designation === null ||
+    institute === null ||
+    degree === null ||
     start_year === null ||
     end_year === null
   ) {
@@ -46,13 +46,13 @@ router.post("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `insert into works ( user_id, company, designation, start_year, end_year ) values ?`;
+        var sql = `insert into educations ( user_id, institute, degree, start_year, end_year ) values ?`;
 
         var values = [
           [
             decoded.user_id,
-            req.body.company,
-            req.body.designation,
+            req.body.institute,
+            req.body.degree,
             req.body.start_year,
             req.body.end_year,
           ],
@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
             });
           } else {
             res.status(200).json({
-              message: "Work added successfully",
+              message: "Education added successfully",
             });
           }
         });
