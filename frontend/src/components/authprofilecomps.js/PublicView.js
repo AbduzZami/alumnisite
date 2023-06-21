@@ -1,107 +1,14 @@
 import React, { useState } from "react";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-
-import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PublicView from "./authprofilecomps.js/PublicView";
-import { AuthContext } from "../contexts/AuthContext";
+import SideBar from "./sidebar";
 import { useContext } from "react";
-import SideBar from "./authprofilecomps.js/sidebar";
+import { AuthContext } from "../../contexts/AuthContext";
 
-function AuthProfile() {
+function PublicView(props) {
   const { currentUser } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [roll_no, setRollNo] = useState("");
-  const [company, setCompany] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [start_year, setStartYear] = useState("");
-  const [end_year, setEndYear] = useState("");
-
-  console.log(name);
-
-  async function handleUpdateName() {
-    try {
-      await axios({
-        method: "patch",
-        url: "/edit_profile/update_name",
-        baseURL: "http://localhost:8800",
-        data: {
-          user_name: name,
-        },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleUpdateRoll() {
-    try {
-      await axios({
-        method: "patch",
-        url: "/edit_profile/update_roll",
-        baseURL: "http://localhost:8800",
-        data: {
-          roll_no: roll_no,
-        },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleAddWork() {
-    try {
-      await axios({
-        method: "post",
-        url: "/edit_profile/add_work",
-        baseURL: "http://localhost:8800",
-        data: {
-          company: company,
-          designation: designation,
-          start_year: start_year,
-          end_year: end_year,
-        },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleUpdateWork() {
-    try {
-      await axios({
-        method: "patch",
-        url: "/edit_profile/add_work",
-        baseURL: "http://localhost:8800",
-        data: {
-          work_id: 1,
-          company: company,
-          designation: designation,
-          start_year: start_year,
-          end_year: end_year,
-        },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <div className="flex flex-wrap">
       <SideBar />
+
       <div>
         <div className="container mx-auto my-10">
           <div className="flex flex-col-reverse md:flex-row mx-5">
@@ -186,4 +93,4 @@ function AuthProfile() {
   );
 }
 
-export default AuthProfile;
+export default PublicView;

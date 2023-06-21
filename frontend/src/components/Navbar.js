@@ -81,13 +81,15 @@ function Navbar() {
                   className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <Link to={`/profile/${currentUser.user_id}`}>Profile</Link>
+                    <Link to={`/editprofile`}>Profile</Link>
                   </li>
                   <li>
                     <Link to="/settings">Settings</Link>
                   </li>
                   <li>
-                    <button onClick={() => logout()}>Logout</button>
+                    <button className="btn" onClick={() => logout()}>
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>

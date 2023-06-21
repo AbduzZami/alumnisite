@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 var connection = require("./connection.js");
 const getAllUsers = require("./routes/get_all_users");
+const getUserById = require("./routes/get_user_by_id");
 const registerUser = require("./routes/register_user");
 const loginUser = require("./routes/login_user");
 const logout = require("./routes/logout");
@@ -57,6 +58,7 @@ app.use(cookieParser());
 // app.set("view engine", "hbs");
 
 app.use("/users", getAllUsers);
+app.use("/userbyid", getUserById);
 app.use("/register", registerUser);
 app.use("/login", loginUser);
 app.use("/logout", logout);

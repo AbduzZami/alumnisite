@@ -23,11 +23,8 @@ function Profile() {
     try {
       axios({
         method: "get",
-        url: "/users",
+        url: `/userbyid/${id}`,
         baseURL: "http://localhost:8800",
-        data: {
-          user_id: id,
-        },
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -49,18 +46,7 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      {isLoading ? (
-        currentUser.user_id === parseInt(id) ? (
-          <AuthProfile user_data={userData[0]} />
-        ) : (
-          <NormProfile user_data={userData[0]} />
-        )
-      ) : (
-        <div className="flex justify-center items-center h-screen">
-          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
-        </div>
-      )}
-      <div />
+      <NormProfile user_data={userData} />
       <Footer />
     </div>
   );

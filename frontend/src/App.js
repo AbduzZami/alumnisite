@@ -12,6 +12,10 @@ import Navbar from "./components/Navbar";
 import NewsEventDetails from "./pages/NewsEventDetails";
 import Error from "./pages/Error";
 import PostNews from "./pages/PostNews";
+import AuthProfile from "./components/AuthProfile";
+import PublicView from "./components/authprofilecomps.js/PublicView";
+import EditName from "./components/authprofilecomps.js/EditName";
+import EditWork from "./components/authprofilecomps.js/EditWork";
 
 function App() {
   return (
@@ -24,6 +28,12 @@ function App() {
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/editprofile" element={<AuthProfile />} />
+        <Route path="/editprofile/publicview" element={<PublicView />} />
+        <Route path="/editprofile/editname" element={<EditName />} />
+        <Route path="/editprofile/editroll" element={<EditName />} />
+        <Route path="/editprofile/editheadline" element={<EditName />} />
+        <Route path="/editprofile/editwork" element={<EditWork />} />
         <Route path="/newsevents/:id" element={<NewsEventDetails />} />
         <Route path="/newsevents/post" element={<PostNews />} />
       </Routes>
