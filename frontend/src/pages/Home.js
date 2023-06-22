@@ -63,9 +63,7 @@ function Home() {
                     architecto eius quis quibusdam fugiat dicta.
                   </p>
 
-                  <a href="#" class="mt-8 btn">
-                    Get in Touch
-                  </a>
+                  <button class="mt-8 btn ">Get in Touch</button>
                 </div>
               </div>
             </div>

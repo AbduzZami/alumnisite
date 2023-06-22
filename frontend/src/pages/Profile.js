@@ -34,7 +34,7 @@ function Profile() {
         } else {
           setUserData(null);
         }
-        setIsLoading(true);
+        setIsLoading(false);
       });
     } catch (error) {
       setUserData([]);

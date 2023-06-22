@@ -14,7 +14,7 @@ import Error from "./pages/Error";
 import PostNews from "./pages/PostNews";
 import AuthProfile from "./components/AuthProfile";
 import PublicView from "./components/authprofilecomps.js/PublicView";
-import EditName from "./components/authprofilecomps.js/EditName";
+import PersonalInformation from "./components/authprofilecomps.js/PersonalInfo";
 import EditWork from "./components/authprofilecomps.js/EditWork";
 
 function App() {
@@ -30,9 +30,12 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/editprofile" element={<AuthProfile />} />
         <Route path="/editprofile/publicview" element={<PublicView />} />
-        <Route path="/editprofile/editname" element={<EditName />} />
-        <Route path="/editprofile/editroll" element={<EditName />} />
-        <Route path="/editprofile/editheadline" element={<EditName />} />
+        <Route path="/editprofile/editname" element={<PersonalInformation />} />
+        <Route path="/editprofile/editroll" element={<PersonalInformation />} />
+        <Route
+          path="/editprofile/editheadline"
+          element={<PersonalInformation />}
+        />
         <Route path="/editprofile/editwork" element={<EditWork />} />
         <Route path="/newsevents/:id" element={<NewsEventDetails />} />
         <Route path="/newsevents/post" element={<PostNews />} />
