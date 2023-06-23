@@ -12,7 +12,7 @@ function Home() {
   // const [status, setState] = React.useState(false);
   // const [text, setText] = React.useState("");
   return (
-    <>
+    <div>
       <Navbar />
       <div className="container mx-auto">
         {/* 
@@ -48,7 +48,7 @@ function Home() {
                 </div>
               </div>
 
-              <div class="relative flex items-center bg-gray-100">
+              <div class=" flex items-center bg-gray-100">
                 <span class="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16 lg:bg-gray-100"></span>
 
                 <div class="p-8 sm:p-16 lg:p-24">
@@ -117,7 +117,7 @@ function Home() {
         </div> */}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

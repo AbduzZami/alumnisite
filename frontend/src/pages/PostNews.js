@@ -1,8 +1,32 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useState } from "react";
+import axios from "axios";
 
 function PostNews() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image_url, setImageUrl] = useState("");
+  async function handleAddPost() {
+    try {
+      await axios({
+        method: "post",
+        url: "/add_post",
+        baseURL: "http://localhost:8800",
+        data: {
+          title: title,
+          description: description,
+          image_url: "image_url",
+        },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div>
       <Navbar />
@@ -35,6 +59,9 @@ function PostNews() {
                     Headline
                   </label>
                   <input
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Headline"
                     type="text"
@@ -130,6 +157,9 @@ function PostNews() {
                   </label>
 
                   <textarea
+                    onChange={(e) => {
+                      setDescription(e.target.value);
+                    }}
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Description"
                     rows="8"
@@ -145,7 +175,7 @@ function PostNews() {
                 </div>
 
                 <div class="mt-4">
-                  <button type="submit" class="btn">
+                  <button type="submit" class="btn" onClick={handleAddPost}>
                     Submit
                   </button>
                 </div>

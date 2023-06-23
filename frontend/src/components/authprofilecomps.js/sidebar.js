@@ -46,7 +46,7 @@ function SideBar() {
                 <ul class="mt-2 space-y-1 px-4">
                   <li>
                     <a
-                      href="/editprofile/editname"
+                      href="/editprofile/general"
                       class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
                       General
@@ -64,10 +64,10 @@ function SideBar() {
 
                   <li>
                     <a
-                      href=""
+                      href="/editprofile/editeducation"
                       class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
-                      Edit Education
+                      Education
                     </a>
                   </li>
 

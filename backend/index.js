@@ -10,6 +10,7 @@ const logout = require("./routes/logout");
 const updateName = require("./routes/edit_profile/update_name");
 const updateRoll = require("./routes/edit_profile/update_roll");
 const setHeadline = require("./routes/edit_profile/set_headline");
+const addPost = require("./routes/add_post");
 
 // work
 const addWork = require("./routes/edit_profile/add_work");
@@ -62,6 +63,7 @@ app.use("/userbyid", getUserById);
 app.use("/register", registerUser);
 app.use("/login", loginUser);
 app.use("/logout", logout);
+app.use("/add_post", addPost);
 app.use("/edit_profile/update_name", updateName);
 app.use("/edit_profile/update_roll", updateRoll);
 app.use("/edit_profile/set_headline", setHeadline);

@@ -16,6 +16,7 @@ import AuthProfile from "./components/AuthProfile";
 import PublicView from "./components/authprofilecomps.js/PublicView";
 import PersonalInformation from "./components/authprofilecomps.js/PersonalInfo";
 import EditWork from "./components/authprofilecomps.js/EditWork";
+import EditEducation from "./components/authprofilecomps.js/EditEducation";
 
 function App() {
   return (
@@ -30,13 +31,9 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/editprofile" element={<AuthProfile />} />
         <Route path="/editprofile/publicview" element={<PublicView />} />
-        <Route path="/editprofile/editname" element={<PersonalInformation />} />
-        <Route path="/editprofile/editroll" element={<PersonalInformation />} />
-        <Route
-          path="/editprofile/editheadline"
-          element={<PersonalInformation />}
-        />
+        <Route path="/editprofile/general" element={<PersonalInformation />} />
         <Route path="/editprofile/editwork" element={<EditWork />} />
+        <Route path="/editprofile/editeducation" element={<EditEducation />} />
         <Route path="/newsevents/:id" element={<NewsEventDetails />} />
         <Route path="/newsevents/post" element={<PostNews />} />
       </Routes>

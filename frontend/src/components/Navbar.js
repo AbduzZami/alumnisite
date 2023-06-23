@@ -87,9 +87,9 @@ function Navbar() {
                     <Link to="/settings">Settings</Link>
                   </li>
                   <li>
-                    <button className="btn" onClick={() => logout()}>
+                    <Link className="" onClick={() => logout()}>
                       Logout
-                    </button>
+                    </Link>
                   </li>
                 </ul>
               </div>

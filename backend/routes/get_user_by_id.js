@@ -25,7 +25,7 @@ router.get("/:user_id", async (req, res) => {
             });
           } else {
             // EDUCATION
-            var query = `select works.work_id, works.company, works.designation, works.start_year, works.end_year from works where works.user_id = ${user_id}`;
+            var query = `select educations.edu_id, educations.institute, educations.degree, educations.start_year, educations.end_year from educations where educations.user_id = ${user_id}`;
             connection.query(query, function (error, educations, fields) {
               if (error) {
                 res.status(500).json({
