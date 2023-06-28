@@ -1,37 +1,36 @@
 const express = require("express");
 const router = express.Router();
-var connection = require("../connection.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const connection = require("../../connection");
 
 router.post("/", async (req, res) => {
+  const company = req.body.company;
+  const designation = req.body.designation;
+  const start_year = req.body.start_year;
+  const end_year = req.body.end_year;
+
+  if (
+    company === undefined ||
+    designation === undefined ||
+    start_year === undefined ||
+    end_year === undefined ||
+    company === "" ||
+    designation === "" ||
+    start_year === "" ||
+    end_year === "" ||
+    company === null ||
+    designation === null ||
+    start_year === null ||
+    end_year === null
+  ) {
+    res.status(500).json({
+      message: "Invalid request",
+    });
+    return;
+  }
   try {
-    const title = req.body.title;
-    const description = req.body.description;
-    const image_url = req.body.image_url;
-
-    console.log(title);
-    console.log(description);
-    console.log(image_url);
-
-    if (
-      title === undefined ||
-      description === undefined ||
-      image_url === undefined ||
-      title === "" ||
-      description === "" ||
-      image_url === "" ||
-      title === null ||
-      description === null ||
-      image_url === null
-    ) {
-      res.status(500).json({
-        message: "Invalid request",
-      });
-      return;
-    }
     const token = req.cookies.access_token;
-    console.log(req);
     if (!token) {
       res.status(401).json({
         message: "Unauthorized Access",
@@ -47,14 +46,15 @@ router.post("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `insert into posts ( user_id, title, description, image_url ) values ?`;
+        var sql = `insert into works ( user_id, company, designation, start_year, end_year ) values ?`;
 
         var values = [
           [
             decoded.user_id,
-            req.body.title,
-            req.body.description,
-            req.body.image_url,
+            req.body.company,
+            req.body.designation,
+            req.body.start_year,
+            req.body.end_year,
           ],
         ];
 
@@ -67,8 +67,7 @@ router.post("/", async (req, res) => {
             });
           } else {
             res.status(200).json({
-              message:
-                "Post added successfully. Will be public after a review.",
+              message: "Work added successfully",
             });
           }
         });

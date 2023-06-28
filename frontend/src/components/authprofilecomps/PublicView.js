@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import SideBar from "./sidebar";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import Navbar from "../Navbar";
 
 function PublicView(props) {
   const { currentUser } = useContext(AuthContext);
   return (
-    <div className="flex flex-wrap">
-      <SideBar />
-
-      <div>
-        <div className="container mx-auto my-10">
+    <div className="">
+      <Navbar />
+      <div className="flex flex-wrap">
+        <SideBar />
+        <div className=" my-10">
           <div className="flex flex-col-reverse md:flex-row mx-5">
             <div className="md:w-4/6 mr-10">
               <section>

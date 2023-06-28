@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 function SideBar() {
   const { currentUser } = useContext(AuthContext);
   return (
-    <div>
+    <div className="w-full md:w-1/4 lg:w-1/6">
       <div class="flex h-screen flex-col justify-between border-e bg-white">
         <div class="px-4 py-6">
           <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
@@ -76,7 +76,7 @@ function SideBar() {
                       href=""
                       class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
-                      Edit Socials
+                      Socials
                     </a>
                   </li>
 
@@ -85,7 +85,7 @@ function SideBar() {
                       href=""
                       class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
-                      Edit Phones
+                      Phones
                     </a>
                   </li>
 
@@ -94,7 +94,7 @@ function SideBar() {
                       href=""
                       class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
-                      Edit Emails
+                      Emails
                     </a>
                   </li>
                 </ul>
@@ -103,10 +103,10 @@ function SideBar() {
 
             <li>
               <a
-                href=""
+                href="/editprofile/myposts"
                 class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
-                Billing
+                Posts
               </a>
             </li>
 

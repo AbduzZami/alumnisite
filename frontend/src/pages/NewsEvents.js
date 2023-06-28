@@ -5,8 +5,35 @@ import NewsCardLarge from "../components/NewsCardLarge";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function NewsEvents() {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    try {
+      axios({
+        method: "get",
+        url: "/posts",
+        baseURL: "http://localhost:8800",
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res.data.data);
+          setPosts(res.data.data);
+        } else {
+          setPosts([]);
+        }
+        setIsLoading(true);
+      });
+    } catch (error) {
+      setPosts([]);
+      setIsLoading(true);
+      console.error(error);
+    }
+  }, []);
   return (
     <>
       <Navbar />
@@ -14,30 +41,28 @@ function NewsEvents() {
         <div className="flex flex-col-reverse md:flex-row">
           <div className="md:w-5/6 lg:mr-20">
             <div className=" flex flex-wrap gap-4">
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
-              <NewsCardLarge />
+              {isLoading ? (
+                <div className="flex flex-wrap gap-4">
+                  {
+                    // if alumnies is not empty or null
+                    posts.length > 0 ? (
+                      posts.map((post) => (
+                        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
+                          <NewsCardLarge key={post.post_id} post={post} />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="flex justify-center items-center">
+                        <h1 className="text-2xl">No Post Found</h1>
+                      </div>
+                    )
+                  }
+                </div>
+              ) : (
+                <div className="flex justify-center items-center">
+                  <h1 className="text-2xl">Loading...</h1>
+                </div>
+              )}
             </div>
             <div className="m-2">
               <button className="btn btn-outline">Load More</button>
@@ -45,7 +70,7 @@ function NewsEvents() {
           </div>
           <div className="md:w-1/6 mt-5 mb-5">
             <div className="sticky top-10">
-              <Link to="/newsevents/post">
+              <Link to="/newsevents/createpost">
                 <div class="group relative block h-64 sm:h-80 lg:h-96">
                   <span class="absolute inset-0 border-2 border-dashed border-black"></span>
 

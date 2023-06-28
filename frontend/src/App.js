@@ -13,10 +13,11 @@ import NewsEventDetails from "./pages/NewsEventDetails";
 import Error from "./pages/Error";
 import PostNews from "./pages/PostNews";
 import AuthProfile from "./components/AuthProfile";
-import PublicView from "./components/authprofilecomps.js/PublicView";
-import PersonalInformation from "./components/authprofilecomps.js/PersonalInfo";
-import EditWork from "./components/authprofilecomps.js/EditWork";
-import EditEducation from "./components/authprofilecomps.js/EditEducation";
+import PublicView from "./components/authprofilecomps/PublicView";
+import PersonalInformation from "./components/authprofilecomps/PersonalInfo";
+import EditWork from "./components/authprofilecomps/EditWork";
+import EditEducation from "./components/authprofilecomps/EditEducation";
+import MyPosts from "./components/authprofilecomps/MyPosts";
 
 function App() {
   return (
@@ -34,8 +35,9 @@ function App() {
         <Route path="/editprofile/general" element={<PersonalInformation />} />
         <Route path="/editprofile/editwork" element={<EditWork />} />
         <Route path="/editprofile/editeducation" element={<EditEducation />} />
+        <Route path="/editprofile/myposts" element={<MyPosts />} />
+        <Route path="/newsevents/createpost" element={<PostNews />} />
         <Route path="/newsevents/:id" element={<NewsEventDetails />} />
-        <Route path="/newsevents/post" element={<PostNews />} />
       </Routes>
     </div>
   );

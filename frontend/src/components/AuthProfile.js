@@ -4,10 +4,10 @@ import Navbar from "./Navbar";
 
 import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PublicView from "./authprofilecomps.js/PublicView";
+import PublicView from "./authprofilecomps/PublicView";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
-import SideBar from "./authprofilecomps.js/sidebar";
+import SideBar from "./authprofilecomps/sidebar";
 
 function AuthProfile() {
   const { currentUser } = useContext(AuthContext);

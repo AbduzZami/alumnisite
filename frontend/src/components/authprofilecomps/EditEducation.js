@@ -126,9 +126,8 @@ function EditEducation() {
     <div>
       <Navbar />
       <div className="flex flex-wrap">
-        <div className="w-1/5">
-          <SideBar />
-        </div>
+        <SideBar />
+
         <section className="m-5 w-3/5">
           <div className="flex justify-between flex-wrap">
             <p className="font-bold">Educations</p>
