@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import "./index.css";
+import LoginPage from "./pages/Login";
+
+import Error from "./pages/Error";
+
+import General from "./components/useredit/General";
+
+import RequireAuth from "./Auth";
+import UserEditPage from "./pages/UserEditPage";
+import Users from "./pages/Users";
+import Posts from "./pages/Posts";
+import EditPost from "./pages/EditPost";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="*" element={<Error />} />
+        <Route path="/" element={<Users />} />
+        <Route path="/signin" element={<LoginPage />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<UserEditPage />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id" element={<EditPost />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
