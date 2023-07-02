@@ -8,6 +8,7 @@ import SideBar from "../components/sidebar";
 import General from "../components/useredit/General";
 import EditEducation from "../components/useredit/EditEducation";
 import EditWork from "../components/useredit/EditWork";
+import ChangeStatus from "../components/useredit/ChangeStatus";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +57,7 @@ export default function UserEditPage() {
         <div className="text-sm breadcrumbs mb-10">
           <ul>
             <li>
-              <a href="/posts">Posts</a>
+              <a href="/posts">Users</a>
             </li>
             <li>0</li>
           </ul>
@@ -69,29 +70,33 @@ export default function UserEditPage() {
               aria-label="basic tabs example"
             >
               <Tab label="General" {...a11yProps(0)} />
-              <Tab label="Works" {...a11yProps(1)} />
-              <Tab label="Education" {...a11yProps(2)} />
-              <Tab label="Socials" {...a11yProps(3)} />
-              <Tab label="Phones" {...a11yProps(4)} />
-              <Tab label="Emails" {...a11yProps(5)} />
+              <Tab label="Status" {...a11yProps(1)} />
+              <Tab label="Works" {...a11yProps(2)} />
+              <Tab label="Education" {...a11yProps(3)} />
+              <Tab label="Socials" {...a11yProps(4)} />
+              <Tab label="Phones" {...a11yProps(5)} />
+              <Tab label="Emails" {...a11yProps(6)} />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             <General />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <EditWork />
+            <ChangeStatus />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <EditEducation />
+            <EditWork />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item Three
+            <EditEducation />
           </TabPanel>
           <TabPanel value={value} index={4}>
             Item Three
           </TabPanel>
           <TabPanel value={value} index={5}>
+            Item Three
+          </TabPanel>
+          <TabPanel value={value} index={6}>
             Item Three
           </TabPanel>
         </Box>

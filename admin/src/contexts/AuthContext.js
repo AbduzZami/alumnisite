@@ -9,14 +9,14 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  async function login(email, password) {
+  async function login(user_name, password) {
     try {
       axios({
         method: "post",
-        url: "/login",
+        url: "/admin/login",
         baseURL: "http://localhost:8800",
         data: {
-          email: email,
+          user_name: user_name,
           password: password,
         },
         withCredentials: true,
@@ -35,11 +35,10 @@ export const AuthProvider = ({ children }) => {
     try {
       axios({
         method: "post",
-        url: "/register",
+        url: "/admin/register",
         baseURL: "http://localhost:8800",
         data: {
           user_name: user_name,
-          email: email,
           password: password,
           roll_no: roll_no,
         },
@@ -58,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     try {
       axios({
         method: "post",
-        url: "/logout",
+        url: "/admin/logout",
         baseURL: "http://localhost:8800",
       }).then((res) => {
         console.log(res);

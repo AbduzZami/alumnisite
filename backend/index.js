@@ -39,6 +39,13 @@ const updateEducation = require("./routes/edit_profile/update_education");
 // const deleteEmail = require("./routes/edit_profile/delete_email");
 // const updateEmail = require("./routes/edit_profile/update_email");
 
+// admin
+
+const adminLogin = require("./routes/admin_routes/login_admin.js");
+const addUserByAdmin = require("./routes/admin_routes/add_user.js");
+const editUserByAdmin = require("./routes/admin_routes/edit_user.js");
+const changeUserStatus = require("./routes/admin_routes/change_user_status.js");
+
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
@@ -48,7 +55,7 @@ const app = express();
 const port = process.env.PORT;
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://localhost:5000"],
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
   })
@@ -77,6 +84,10 @@ app.use("/edit_profile/update_work", updateWork);
 app.use("/edit_profile/add_education", addEducation);
 app.use("/edit_profile/delete_education", deleteEducation);
 app.use("/edit_profile/update_education", updateEducation);
+app.use("/admin/login", adminLogin);
+app.use("/admin/adduser", addUserByAdmin);
+app.use("/admin/edituser", editUserByAdmin);
+app.use("/admin/changeuserstatus", changeUserStatus);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 function LoginPage() {
   const { login } = useContext(AuthContext);
-  const [email, setEmail] = React.useState("");
+  const [user_name, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
     <>
@@ -89,14 +89,14 @@ function LoginPage() {
                   for="Email"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Email
+                  Username
                 </label>
 
                 <input
                   type="email"
                   id="Email"
                   name="email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUserName(e.target.value)}
                   class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -119,7 +119,7 @@ function LoginPage() {
               </div>
 
               <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button class="btn" onClick={() => login(email, password)}>
+                <button class="btn" onClick={() => login(user_name, password)}>
                   Sign In
                 </button>
 
