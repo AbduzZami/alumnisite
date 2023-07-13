@@ -83,55 +83,55 @@ function LoginPage() {
                 </p>
               </div>
 
-              {/* <form action="/" class="mt-8 grid grid-cols-6 gap-6"> */}
-              <div class="col-span-6">
-                <label
-                  for="Email"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
+              <div class="mt-8 grid grid-cols-6 gap-6">
+                <div class="col-span-6">
+                  <label
+                    for="Email"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
 
-                <input
-                  type="email"
-                  id="Email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
-                />
+                  <input
+                    type="email"
+                    id="Email"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                  />
+                </div>
+
+                <div class="col-span-6">
+                  <label
+                    for="Password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+
+                  <input
+                    type="password"
+                    id="Password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
+                  />
+                </div>
+
+                <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+                  <button class="btn" onClick={() => login(email, password)}>
+                    Sign In
+                  </button>
+
+                  <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                    Don't have an account?
+                    <a href="#" className="text-gray-700 underline">
+                      Sign Up
+                    </a>
+                    .
+                  </p>
+                </div>
               </div>
-
-              <div class="col-span-6">
-                <label
-                  for="Password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-
-                <input
-                  type="password"
-                  id="Password"
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  class="mt-1 w-full h-10 border rounded-md border-gray-400 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button class="btn" onClick={() => login(email, password)}>
-                  Sign In
-                </button>
-
-                <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Don't have an account?
-                  <a href="#" class="text-gray-700 underline">
-                    Sign Up
-                  </a>
-                  .
-                </p>
-              </div>
-              {/* </form> */}
             </div>
           </main>
         </div>

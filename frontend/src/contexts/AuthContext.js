@@ -1,10 +1,13 @@
 import { createContext, useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
@@ -20,13 +23,22 @@ export const AuthProvider = ({ children }) => {
           password: password,
         },
         withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setCurrentUser(res.data.data);
-        }
-      });
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            setCurrentUser(res.data.data);
+            toast(res.data.message);
+            navigate("/");
+          } else {
+            toast(res.data.message);
+          }
+        })
+        .catch((err) => {
+          toast(err.response.data.message);
+        });
     } catch (error) {
+      toast(error);
       console.error(error);
     }
   }

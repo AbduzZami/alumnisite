@@ -18,6 +18,9 @@ import PersonalInformation from "./components/authprofilecomps/PersonalInfo";
 import EditWork from "./components/authprofilecomps/EditWork";
 import EditEducation from "./components/authprofilecomps/EditEducation";
 import MyPosts from "./components/authprofilecomps/MyPosts";
+import toast, { Toaster } from "react-hot-toast";
+import EditSocials from "./components/authprofilecomps/EditSocials";
+import RequireAuth from "./contexts/RequireAuth";
 
 function App() {
   return (
@@ -30,15 +33,25 @@ function App() {
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/editprofile" element={<AuthProfile />} />
-        <Route path="/editprofile/publicview" element={<PublicView />} />
-        <Route path="/editprofile/general" element={<PersonalInformation />} />
-        <Route path="/editprofile/editwork" element={<EditWork />} />
-        <Route path="/editprofile/editeducation" element={<EditEducation />} />
-        <Route path="/editprofile/myposts" element={<MyPosts />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/editprofile" element={<AuthProfile />} />
+          <Route path="/editprofile/publicview" element={<PublicView />} />
+          <Route
+            path="/editprofile/general"
+            element={<PersonalInformation />}
+          />
+          <Route path="/editprofile/editwork" element={<EditWork />} />
+          <Route
+            path="/editprofile/editeducation"
+            element={<EditEducation />}
+          />
+          <Route path="/editprofile/editsocials" element={<EditSocials />} />
+          <Route path="/editprofile/myposts" element={<MyPosts />} />
+        </Route>
         <Route path="/newsevents/createpost" element={<PostNews />} />
         <Route path="/newsevents/:id" element={<NewsEventDetails />} />
       </Routes>
+      <Toaster />
     </div>
   );
 }

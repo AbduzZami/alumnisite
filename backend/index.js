@@ -25,9 +25,9 @@ const deleteEducation = require("./routes/edit_profile/delete_education");
 const updateEducation = require("./routes/edit_profile/update_education");
 
 // socials
-// const addSocial = require("./routes/edit_profile/add_social");
-// const deleteSocial = require("./routes/edit_profile/delete_social");
-// const updateSocial = require("./routes/edit_profile/update_social");
+const addSocial = require("./routes/edit_profile/add_social");
+const deleteSocial = require("./routes/edit_profile/delete_social");
+const updateSocial = require("./routes/edit_profile/update_social");
 
 // phones
 // const addPhone = require("./routes/edit_profile/add_phone");
@@ -88,6 +88,9 @@ app.use("/admin/login", adminLogin);
 app.use("/admin/adduser", addUserByAdmin);
 app.use("/admin/edituser", editUserByAdmin);
 app.use("/admin/changeuserstatus", changeUserStatus);
+app.use("/edit_profile/add_social", addSocial);
+app.use("/edit_profile/delete_social", deleteSocial);
+app.use("/edit_profile/update_social", updateSocial);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

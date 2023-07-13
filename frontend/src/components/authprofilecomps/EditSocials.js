@@ -6,12 +6,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import Navbar from "../Navbar";
 
-function EditEducation() {
-  const [edu_id, seteduID] = useState("");
-  const [institute, setinstitute] = useState("");
-  const [degree, setdegree] = useState("");
-  const [start_year, setStartYear] = useState("");
-  const [end_year, setEndYear] = useState("");
+function EditSocials() {
+  const [social_id, setSocialID] = useState("");
+  const [category, setCategory] = useState("");
+  const [link, setLink] = useState("");
   const [userData, setUserData] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
@@ -43,17 +41,15 @@ function EditEducation() {
     }
   }, [currentUser]);
 
-  async function handleAddEducation() {
+  async function handleAddSocial() {
     try {
       await axios({
         method: "post",
-        url: "/edit_profile/add_education",
+        url: "/edit_profile/add_social",
         baseURL: "http://localhost:8800",
         data: {
-          institute: institute,
-          degree: degree,
-          start_year: start_year,
-          end_year: end_year,
+          category: category,
+          link: link,
         },
         withCredentials: true,
       }).then((res) => {
@@ -64,18 +60,16 @@ function EditEducation() {
       console.error(error);
     }
   }
-  async function handleUpdateEducation(edu_id) {
+  async function handleUpdateSocial(edu_id) {
     try {
       await axios({
         method: "patch",
-        url: "/edit_profile/update_education",
+        url: "/edit_profile/update_social",
         baseURL: "http://localhost:8800",
         data: {
-          edu_id: edu_id,
-          institute: institute,
-          degree: degree,
-          start_year: start_year,
-          end_year: end_year,
+          social_id: social_id,
+          category: category,
+          link: link,
         },
         withCredentials: true,
       }).then((res) => {
@@ -87,14 +81,14 @@ function EditEducation() {
     }
   }
 
-  async function handleDeleteEducation(edu_id) {
+  async function handleDeleteSocial(edu_id) {
     try {
       await axios({
         method: "delete",
-        url: "/edit_profile/delete_education",
+        url: "/edit_profile/delete_social",
         baseURL: "http://localhost:8800",
         data: {
-          edu_id: edu_id,
+          social_id: social_id,
         },
         withCredentials: true,
       }).then((res) => {
@@ -114,7 +108,7 @@ function EditEducation() {
 
         <section className="m-5 w-3/5">
           <div className="flex justify-between flex-wrap">
-            <p className="font-bold">Educations</p>
+            <p className="font-bold">Socials</p>
 
             <div>
               <p
@@ -128,42 +122,42 @@ function EditEducation() {
                 <form method="dialog" className="modal-box">
                   <h3 className="font-bold text-lg">Hello!</h3>
                   <p className="py-4">
-                    <input
+                    <select
                       onChange={(e) => {
-                        setinstitute(e.target.value);
+                        console.log(e.target.value);
+                        setCategory(e.target.value);
+                      }}
+                      className="select select-bordered w-full max-w-xs"
+                    >
+                      <option disabled selected>
+                        Select Category
+                      </option>
+                      <option>Facebook</option>
+                      <option>Instagram</option>
+                      <option>LinkedIn</option>
+                      <option>Twitter</option>
+                      <option>Youtube</option>
+                      <option>Website</option>
+                    </select>
+                    {/* <input
+                      onChange={(e) => {
+                        setCategory(e.target.value);
                       }}
                       type="text"
                       className="w-80 input w-full input-bordered m-1"
                       placeholder="institute"
-                    />
+                    /> */}
                     <input
                       onChange={(e) => {
-                        setdegree(e.target.value);
+                        setLink(e.target.value);
                       }}
                       type="text"
                       className="w-80 input w-full input-bordered m-1"
                       placeholder="degree"
                     />
-                    <div className="flex flex-wrap gap-2 m-1">
-                      <input
-                        onChange={(e) => {
-                          setStartYear(e.target.value);
-                        }}
-                        type="text"
-                        className="w-36 input w-full input-bordered"
-                        placeholder="Start"
-                      />
-                      <input
-                        onChange={(e) => {
-                          setEndYear(e.target.value);
-                        }}
-                        type="text"
-                        className="w-36 input w-full input-bordered "
-                        placeholder="End"
-                      />
-                    </div>
+
                     <button
-                      onClick={handleAddEducation}
+                      onClick={handleAddSocial}
                       className=" btn btn-success m-1"
                     >
                       Add
@@ -184,24 +178,20 @@ function EditEducation() {
             isLoading === false &&
             userData !== null &&
             userData !== undefined ? (
-              userData.educations.map((edu) => (
-                <div className="my-2" key={edu.edu_id}>
-                  <p>{edu.institute}</p>
-                  <p>{edu.degree}</p>
-                  <p>
-                    {edu.start_year} {"-"} {edu.end_year}
-                  </p>
+              userData.socials.map((social) => (
+                <div className="my-2" key={social.social_id}>
+                  <p>{social.category}</p>
+                  <p>{social.link}</p>
+
                   <div className="flex flex-wrap gap-2">
                     <div>
                       <p
                         className="font-bold"
-                        key={edu.edu_id}
+                        key={social.social_id}
                         onClick={() => {
-                          seteduID(edu.edu_id);
-                          setinstitute(edu.institute);
-                          setdegree(edu.degree);
-                          setStartYear(edu.start_year);
-                          setEndYear(edu.end_year);
+                          setSocialID(social.social_id);
+                          setCategory(social.category);
+                          setLink(social.link);
                           window.my_modal_edit_edu.showModal();
                         }}
                       >
@@ -212,7 +202,7 @@ function EditEducation() {
                       <p
                         className="font-bold"
                         onClick={() => {
-                          seteduID(edu.edu_id);
+                          setSocialID(social.social_id);
                           window.my_modal_delete_edu.showModal();
                         }}
                       >
@@ -234,7 +224,7 @@ function EditEducation() {
               <h3 className="font-bold text-lg">Do you want to delete?</h3>
               <p className="py-4">
                 <button
-                  onClick={() => handleDeleteEducation(edu_id)}
+                  onClick={() => handleDeleteSocial(social_id)}
                   className=" btn btn-success m-1"
                 >
                   Yes
@@ -251,46 +241,33 @@ function EditEducation() {
             <form method="dialog" className="modal-box">
               <h3 className="font-bold text-lg">Hello!</h3>
               <p className="py-4">
+                <select
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option disabled selected>
+                    Select Category
+                  </option>
+                  <option>Facebook</option>
+                  <option>Instagram</option>
+                  <option>LinkedIn</option>
+                  <option>Twitter</option>
+                  <option>Youtube</option>
+                  <option>Website</option>
+                </select>
                 <input
                   onChange={(e) => {
-                    setinstitute(e.target.value);
+                    setLink(e.target.value);
                   }}
-                  value={institute}
-                  type="text"
-                  className="w-80 input w-full input-bordered m-1"
-                  placeholder="institute"
-                />
-                <input
-                  onChange={(e) => {
-                    setdegree(e.target.value);
-                  }}
-                  value={degree}
+                  value={link}
                   type="text"
                   className="w-80 input w-full input-bordered m-1"
                   placeholder="degree"
                 />
-                <div className="flex flex-wrap gap-2 m-1">
-                  <input
-                    onChange={(e) => {
-                      setStartYear(e.target.value);
-                    }}
-                    value={start_year}
-                    type="text"
-                    className="w-36 input w-full input-bordered"
-                    placeholder="Start"
-                  />
-                  <input
-                    onChange={(e) => {
-                      setEndYear(e.target.value);
-                    }}
-                    value={end_year}
-                    type="text"
-                    className="w-36 input w-full input-bordered "
-                    placeholder="End"
-                  />
-                </div>
                 <button
-                  onClick={() => handleUpdateEducation(edu_id)}
+                  onClick={() => handleUpdateSocial(social_id)}
                   className=" btn btn-success m-1"
                 >
                   Update
@@ -308,4 +285,4 @@ function EditEducation() {
   );
 }
 
-export default EditEducation;
+export default EditSocials;
