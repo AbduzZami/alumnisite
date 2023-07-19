@@ -21,6 +21,8 @@ import MyPosts from "./components/authprofilecomps/MyPosts";
 import toast, { Toaster } from "react-hot-toast";
 import EditSocials from "./components/authprofilecomps/EditSocials";
 import RequireAuth from "./contexts/RequireAuth";
+import EditPhones from "./components/authprofilecomps/EditPhone";
+import EditEmail from "./components/authprofilecomps/EditEmail";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
             element={<EditEducation />}
           />
           <Route path="/editprofile/editsocials" element={<EditSocials />} />
+          <Route path="/editprofile/editphones" element={<EditPhones />} />
+          <Route path="/editprofile/editemails" element={<EditEmail />} />
           <Route path="/editprofile/myposts" element={<MyPosts />} />
         </Route>
         <Route path="/newsevents/createpost" element={<PostNews />} />

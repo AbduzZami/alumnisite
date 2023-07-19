@@ -3,28 +3,38 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function PostNews() {
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image_url, setImageUrl] = useState("");
+
   async function handleAddPost() {
     try {
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("title", title);
+      formData.append("description", description);
+
       await axios({
         method: "post",
-        url: "/add_post",
+        url: "/add_post", // Assuming this is the correct API endpoint on the backend
         baseURL: "http://localhost:8800",
-        data: {
-          title: title,
-          description: description,
-          image_url: "image_url",
-        },
+        data: formData,
         withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }).then((res) => {
         console.log(res);
+        toast(res.data.message);
+        // Handle success or any other operations after successful post
       });
     } catch (error) {
       console.error(error);
+      toast(error);
+      // Handle error or any other operations after unsuccessful post
     }
   }
   return (
@@ -53,7 +63,7 @@ function PostNews() {
             </div>
 
             <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-              <form action="" class="space-y-4">
+              <div class="space-y-4">
                 <div className="border-2 rounded-lg">
                   <label class="sr-only" for="headline">
                     Headline
@@ -89,6 +99,7 @@ function PostNews() {
                   <input
                     type="file"
                     className="file-input file-input-bordered w-full max-w-xs"
+                    onChange={(e) => setImage(e.target.files[0])}
                   />
                 </div>
 
@@ -97,7 +108,7 @@ function PostNews() {
                     Submit
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

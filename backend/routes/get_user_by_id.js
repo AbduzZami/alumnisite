@@ -43,7 +43,7 @@ router.get("/:user_id", async (req, res) => {
                     });
                   } else {
                     // PHONES
-                    var query = `select works.work_id, works.company, works.designation, works.start_year, works.end_year from works where works.user_id = ${user_id}`;
+                    var query = `select * from phones where phones.user_id = ${user_id}`;
                     connection.query(query, function (error, phones, fields) {
                       if (error) {
                         res.status(500).json({
@@ -52,7 +52,7 @@ router.get("/:user_id", async (req, res) => {
                         });
                       } else {
                         // EMAILS
-                        var query = `select works.work_id, works.company, works.designation, works.start_year, works.end_year from works where works.user_id = ${user_id}`;
+                        var query = `select * from emails where emails.user_id = ${user_id}`;
                         connection.query(
                           query,
                           function (error, emails, fields) {

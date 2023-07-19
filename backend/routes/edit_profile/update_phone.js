@@ -5,28 +5,20 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.patch("/", async (req, res) => {
-  const edu_id = req.body.edu_id;
-  const institute = req.body.institute;
-  const degree = req.body.degree;
-  const start_year = req.body.start_year;
-  const end_year = req.body.end_year;
+  const phone_id = req.body.phone_id;
+  const category = req.body.category;
+  const phone_no = req.body.phone_no;
 
   if (
-    edu_id === undefined ||
-    institute === undefined ||
-    degree === undefined ||
-    start_year === undefined ||
-    end_year === undefined ||
-    edu_id === "" ||
-    institute === "" ||
-    degree === "" ||
-    start_year === "" ||
-    end_year === "" ||
-    edu_id === null ||
-    institute === null ||
-    degree === null ||
-    start_year === null ||
-    end_year === null
+    phone_id === undefined ||
+    category === undefined ||
+    phone_no === undefined ||
+    phone_id === "" ||
+    category === "" ||
+    phone_no === "" ||
+    phone_id === null ||
+    category === null ||
+    phone_no === null
   ) {
     res.status(500).json({
       message: "Invalid request",
@@ -50,7 +42,7 @@ router.patch("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `update educations set institute = '${institute}' , degree = '${degree}' , start_year = '${start_year}', end_year = '${end_year}' where educations.edu_id = ${edu_id} and educations.user_id = ${decoded.user_id}`;
+        var sql = `update phones set category = '${category}' , phone_no = '${phone_no}' where phones.phone_id = ${phone_id} and phones.user_id = ${decoded.user_id}`;
 
         console.log(req.body);
 
@@ -61,7 +53,7 @@ router.patch("/", async (req, res) => {
             });
           } else {
             res.status(200).json({
-              message: "Education updated successfully",
+              message: "Phone updated successfully",
             });
           }
         });

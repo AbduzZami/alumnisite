@@ -30,14 +30,14 @@ const deleteSocial = require("./routes/edit_profile/delete_social");
 const updateSocial = require("./routes/edit_profile/update_social");
 
 // phones
-// const addPhone = require("./routes/edit_profile/add_phone");
-// const deletePhone = require("./routes/edit_profile/delete_phone");
-// const updatePhone = require("./routes/edit_profile/update_phone");
+const addPhone = require("./routes/edit_profile/add_phone");
+const deletePhone = require("./routes/edit_profile/delete_phone");
+const updatePhone = require("./routes/edit_profile/update_phone");
 
 // emails
-// const addEmail = require("./routes/edit_profile/add_email");
-// const deleteEmail = require("./routes/edit_profile/delete_email");
-// const updateEmail = require("./routes/edit_profile/update_email");
+const addEmail = require("./routes/edit_profile/add_email");
+const deleteEmail = require("./routes/edit_profile/delete_email");
+const updateEmail = require("./routes/edit_profile/update_email");
 
 // admin
 
@@ -64,6 +64,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use("/uploads", express.static("uploads"));
 
 // app.set("view engine", "hbs");
 
@@ -91,6 +92,12 @@ app.use("/admin/changeuserstatus", changeUserStatus);
 app.use("/edit_profile/add_social", addSocial);
 app.use("/edit_profile/delete_social", deleteSocial);
 app.use("/edit_profile/update_social", updateSocial);
+app.use("/edit_profile/add_phone", addPhone);
+app.use("/edit_profile/delete_phone", deletePhone);
+app.use("/edit_profile/update_phone", updatePhone);
+app.use("/edit_profile/add_email", addEmail);
+app.use("/edit_profile/delete_email", deleteEmail);
+app.use("/edit_profile/update_email", updateEmail);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

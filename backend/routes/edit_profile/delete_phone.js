@@ -5,9 +5,9 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.delete("/", async (req, res) => {
-  const work_id = req.body.work_id;
+  const phone_id = req.body.phone_id;
 
-  if (work_id === undefined || work_id === "" || work_id === null) {
+  if (phone_id === undefined || phone_id === "" || phone_id === null) {
     res.status(500).json({
       message: "Invalid request",
     });
@@ -30,7 +30,7 @@ router.delete("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `delete from works where work_id = ${work_id} and user_id = ${decoded.user_id}`;
+        var sql = `delete from phones where phone_id = ${phone_id} and user_id = ${decoded.user_id}`;
 
         // var values = [
         //   [
@@ -51,7 +51,7 @@ router.delete("/", async (req, res) => {
             });
           } else {
             res.status(200).json({
-              message: "Work deleted successfully",
+              message: "Phone deleted successfully",
             });
           }
         });

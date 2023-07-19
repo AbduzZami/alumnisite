@@ -3,27 +3,23 @@ const router = express.Router();
 var connection = require("../connection.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const title = req.body.title;
-    const description = req.body.description;
-    const image_url = req.body.image_url;
+    const { title, description } = req.body;
 
     console.log(title);
     console.log(description);
-    console.log(image_url);
 
     if (
       title === undefined ||
       description === undefined ||
-      image_url === undefined ||
       title === "" ||
       description === "" ||
-      image_url === "" ||
       title === null ||
-      description === null ||
-      image_url === null
+      description === null
     ) {
       res.status(500).json({
         message: "Invalid request",
@@ -54,11 +50,11 @@ router.post("/", async (req, res) => {
             decoded.user_id,
             req.body.title,
             req.body.description,
-            req.body.image_url,
+            req.file.path,
           ],
         ];
 
-        console.log(req.body);
+        // console.log(req.body);
 
         connection.query(sql, [values], function (error, result, fields) {
           if (error) {

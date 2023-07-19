@@ -8,21 +8,19 @@ function NewsCardLarge(props) {
         <article class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm w-full">
           <img
             alt="Office"
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            src={`http://localhost:8800/${props.post.image_url}`}
             class="h-56 w-full object-cover"
           />
 
           <div class="p-4 sm:p-6">
             <a href="#">
               <h3 class="text-lg font-medium text-gray-900">
-                Alumni get together coming soon!
+                {props.post.title}
               </h3>
             </a>
 
             <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-              This was discussed on the board meeting with VC on 2022-Jan-18. We
-              are planning to arrange a get together for all the alumni of RUET.
-              We will be sending out invitations soon. Stay tuned!
+              {props.post.description}
             </p>
 
             <a
