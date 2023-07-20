@@ -3,7 +3,8 @@ const router = express.Router();
 var connection = require("../connection.js");
 
 router.get("/", async (req, res) => {
-  var query = "select * from posts";
+  var query = "select * from posts ORDER BY created_on DESC";
+  const limit = req.query.limit;
   try {
     connection.query(query, function (error, results, fields) {
       if (error) {
@@ -14,7 +15,10 @@ router.get("/", async (req, res) => {
       } else {
         res.status(200).json({
           message: "Success",
-          data: results,
+          data:
+            req.query.limit != null || req.query.limit != undefined
+              ? results.slice(0, limit)
+              : results,
         });
       }
     });

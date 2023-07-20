@@ -33,7 +33,7 @@ function PostNews() {
       });
     } catch (error) {
       console.error(error);
-      toast(error);
+      toast(error.response.data.message);
       // Handle error or any other operations after unsuccessful post
     }
   }

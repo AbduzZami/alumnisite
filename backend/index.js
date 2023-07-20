@@ -13,6 +13,7 @@ const setHeadline = require("./routes/edit_profile/set_headline");
 const addPost = require("./routes/add_post");
 const getAllPost = require("./routes/get_all_post");
 const getMyPosts = require("./routes/get_my_posts");
+const getPostDetails = require("./routes/get_post_details");
 
 // work
 const addWork = require("./routes/edit_profile/add_work");
@@ -76,6 +77,7 @@ app.use("/logout", logout);
 app.use("/add_post", addPost);
 app.use("/posts", getAllPost);
 app.use("/posts/my", getMyPosts);
+app.use("/post", getPostDetails);
 app.use("/edit_profile/update_name", updateName);
 app.use("/edit_profile/update_roll", updateRoll);
 app.use("/edit_profile/set_headline", setHeadline);

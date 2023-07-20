@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function NewsCardLarge(props) {
   return (
-    <Link to={"/newsevents/1"}>
+    <Link to={`/newsevents/${props.post.post_id}`}>
       <div>
         <article class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm w-full">
           <img

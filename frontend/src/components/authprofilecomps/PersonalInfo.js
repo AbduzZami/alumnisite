@@ -3,11 +3,38 @@ import { useState } from "react";
 import axios from "axios";
 import SideBar from "./sidebar";
 import Navbar from "../Navbar";
+import { toast } from "react-hot-toast";
 
 function PersonalInformation() {
+  const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [roll_no, setRoll] = useState("");
   const [headline, setHeadline] = useState("");
+  async function handleUpdateImage() {
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
+
+      await axios({
+        method: "post",
+        url: "/edit_profile/set_image", // Assuming this is the correct API endpoint on the backend
+        baseURL: "http://localhost:8800",
+        data: formData,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+        console.log(res);
+        toast(res.data.message);
+        // Handle success or any other operations after successful post
+      });
+    } catch (error) {
+      console.error(error);
+      toast(error.response.data.message);
+      // Handle error or any other operations after unsuccessful post
+    }
+  }
   async function handleUpdateName() {
     try {
       await axios({
@@ -81,6 +108,25 @@ function PersonalInformation() {
               />
               <button
                 onClick={handleUpdateName}
+                className="btn btn-success m-1"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+
+          <div className="">
+            <h3 className="font-bold text-lg m-1 mt-10">Update Image</h3>
+            <div className="py-4 m-1 flex flex-wrap">
+              <div>
+                <input
+                  type="file"
+                  className="file-input file-input-bordered w-full max-w-xs"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+              </div>
+              <button
+                onClick={handleUpdateImage}
                 className="btn btn-success m-1"
               >
                 Update

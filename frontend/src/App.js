@@ -53,7 +53,7 @@ function App() {
           <Route path="/editprofile/myposts" element={<MyPosts />} />
         </Route>
         <Route path="/newsevents/createpost" element={<PostNews />} />
-        <Route path="/newsevents/:id" element={<NewsEventDetails />} />
+        <Route path="/newsevents/:post_id" element={<NewsEventDetails />} />
       </Routes>
       <Toaster />
     </div>

@@ -1,26 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NewsCard() {
+function NewsCard(props) {
   return (
-    <Link to="/newsevents/1">
-      <div>
-        <div className="card card-side bg-base-100 shadow-xl h-24 m-2 cursor-pointer hover:bg-black hover:text-white">
-          <figure>
-            <img
-              className="w-24 h-full"
-              src="https://th.bing.com/th/id/OIP.22zeQqg6aP_7WZRpQzPsTAHaE8?pid=ImgDet&rs=1"
-              alt="Movie"
-            />
-          </figure>
-          <div className="m-2 truncate ">
-            <h2 className="font-bold">Alumni get together coming soon!</h2>
-            <p>
-              This was discussed on the board meeting with VC on 2022-Jan-18
-            </p>
-            {/* <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Watch</button>
-                </div> */}
+    <Link to={`/newsevents/${props.post.post_id}`}>
+      <div class="p-2 w-full">
+        <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+          <img
+            alt="team"
+            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
+            src={`http://localhost:8800/${props.post.image_url}`}
+          />
+          <div class="flex-grow">
+            <h2 class="text-gray-900 title-font font-medium">
+              {props.post.title}
+            </h2>
+            <p class="text-gray-500 line-clamp-2">{props.post.description}</p>
           </div>
         </div>
       </div>
