@@ -91,9 +91,9 @@ function Navbar() {
                   <li>
                     <Link to={`/editprofile`}>Profile</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/settings">Settings</Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link className="" onClick={() => logout()}>
                       Logout

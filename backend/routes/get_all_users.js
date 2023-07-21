@@ -4,7 +4,7 @@ var connection = require("../connection.js");
 
 router.get("/", async (req, res) => {
   var query =
-    "select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status, user_headline.headline from users left join user_headline on users.user_id = user_headline.user_id";
+    "select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status, user_headline.headline, users.image_url from users left join user_headline on users.user_id = user_headline.user_id";
   try {
     connection.query(query, function (error, results, fields) {
       if (error) {

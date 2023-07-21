@@ -36,7 +36,7 @@ function App() {
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route element={<RequireAuth />}>
-          <Route path="/editprofile" element={<AuthProfile />} />
+          <Route path="/editprofile" element={<PublicView />} />
           <Route path="/editprofile/publicview" element={<PublicView />} />
           <Route
             path="/editprofile/general"

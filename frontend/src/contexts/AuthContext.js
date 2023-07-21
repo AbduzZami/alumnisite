@@ -55,10 +55,13 @@ export const AuthProvider = ({ children }) => {
           password: password,
           roll_no: roll_no,
         },
+        withCredentials: true,
       }).then((res) => {
         console.log(res);
         if (res.status === 200) {
           setCurrentUser(res.data.data);
+          toast(res.data.message);
+          navigate("/");
         }
       });
     } catch (error) {
@@ -76,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         console.log(res);
         if (res.status === 200) {
           setCurrentUser(null);
+          toast(res.data.message);
         }
       });
     } catch (error) {

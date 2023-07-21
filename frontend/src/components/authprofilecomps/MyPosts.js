@@ -54,39 +54,38 @@ function MyPosts() {
             </div>
           </div>
           <hr className="h-px bg-black border-0" />
-          <table className="table-auto w-full ">
+          <table className="table-auto w-full border-collapse">
             <thead>
-              <tr className="">
-                <th>Image</th>
-                <th>Headline</th>
-                <th>Description</th>
-                <th>Time</th>
-                <th>Actions</th>
+              <tr className="bg-gray-200">
+                <th className="px-4 py-2">Image</th>
+                <th className="px-4 py-2">Headline</th>
+                <th className="px-4 py-2">Time</th>
+                <th className="px-4 py-2">Status</th>
+                <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {
-                // if alumnies is not empty or null
-                isLoading === false && posts !== null && posts !== undefined ? (
-                  posts.map((post) => (
-                    <tr>
-                      <td>shsdfjsfdkjnk</td>
-                      <td>fsfsdsdffd</td>
-                      <td>fsfdsdffsfdsxddd</td>
-                      <td>454545</td>
-                      <td>Edit</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td>shsdfjsfdkjnk</td>
-                    <td>fsfsdsdffd</td>
-                    <td>fsfdsdffsfdsxddd</td>
-                    <td>454545</td>
-                    <td>Edit</td>
+              {isLoading === false && posts !== null && posts !== undefined ? (
+                posts.map((post, index) => (
+                  <tr key={index} className="border-t">
+                    <td className="px-4 py-2">
+                      <img
+                        src={`http://localhost:8800/${post.image_url}`}
+                        alt="post"
+                        className="w-10 h-10 object-cover m-2 rounded-md"
+                      />
+                    </td>
+                    <td className="px-4 py-2">{post.title}</td>
+                    <td className="px-4 py-2">{post.created_on}</td>
+                    <td className="px-4 py-2">{post.status}</td>
+                    <td className="px-4 py-2">Edit</td>
                   </tr>
-                )
-              }{" "}
+                ))
+              ) : (
+                <tr>
+                  <td className="px-4 py-2">No Posts</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </section>

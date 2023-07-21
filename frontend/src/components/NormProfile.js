@@ -14,21 +14,18 @@ function NormProfile(props) {
             <section className="mt-5">
               <p className="font-bold">Work</p>
               <hr className="h-px bg-black border-0" />
-              <div className="my-2">
-                <p>Founder & CEO</p>
-                <p>Niharon Technologies</p>
-                <p>2019 - Present</p>
-              </div>
-              <div className="my-2">
-                <p>Founder & CEO</p>
-                <p>Niharon Technologies</p>
-                <p>2019 - Present</p>
-              </div>
-              <div className="my-2">
-                <p>Founder & CEO</p>
-                <p>Niharon Technologies</p>
-                <p>2019 - Present</p>
-              </div>
+              {props.user_data.work.map((work) => {
+                return (
+                  <div className="my-2">
+                    <p>{work.position}</p>
+                    <p>{work.company}</p>
+                    <p>{work.location}</p>
+                    <p>
+                      {work.start_date} - {work.end_date}
+                    </p>
+                  </div>
+                );
+              })}
             </section>
 
             <section className="mt-5">

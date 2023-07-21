@@ -40,7 +40,7 @@ function EditWork() {
       setIsLoading(true);
       console.error(error);
     }
-  }, []);
+  }, [currentUser]);
 
   async function handleAddWork() {
     try {
@@ -56,6 +56,7 @@ function EditWork() {
         },
         withCredentials: true,
       }).then((res) => {
+        window.location.reload();
         console.log(res);
       });
     } catch (error) {
@@ -77,6 +78,7 @@ function EditWork() {
         },
         withCredentials: true,
       }).then((res) => {
+        window.location.reload();
         console.log(res);
       });
     } catch (error) {
@@ -95,6 +97,7 @@ function EditWork() {
         },
         withCredentials: true,
       }).then((res) => {
+        window.location.reload();
         console.log(res);
       });
     } catch (error) {
@@ -102,26 +105,6 @@ function EditWork() {
     }
   }
 
-  async function handleAddWork() {
-    try {
-      await axios({
-        method: "post",
-        url: "/edit_profile/add_work",
-        baseURL: "http://localhost:8800",
-        data: {
-          company: company,
-          designation: designation,
-          start_year: start_year,
-          end_year: end_year,
-        },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   return (
     <div>
       <Navbar />
