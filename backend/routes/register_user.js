@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
         // );
 
         connection.query(
-          `select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status from users where email = '${req.body.email}'`,
+          `select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status, users.image_url from users where email = '${req.body.email}'`,
           function (error, result, fields) {
             if (error) {
               res.status(500).json({

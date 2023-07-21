@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 router.get("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
   try {
-    var query = `select * from (select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status, user_headline.headline from users left join user_headline on users.user_id = user_headline.user_id) as users where users.user_id = ${user_id}`;
+    var query = `select * from (select users.user_id,users.user_name,users.email, users.roll_no, users.verification_status, user_headline.headline, users.image_url from users left join user_headline on users.user_id = user_headline.user_id) as users where users.user_id = ${user_id}`;
 
     connection.query(query, function (error, user, fields) {
       if (error) {

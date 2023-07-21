@@ -4,12 +4,49 @@ import axios from "axios";
 import SideBar from "./sidebar";
 import Navbar from "../Navbar";
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function PersonalInformation() {
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [roll_no, setRoll] = useState("");
   const [headline, setHeadline] = useState("");
+
+  const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(currentUser.user_id);
+    try {
+      axios({
+        method: "get",
+        url: `/userbyid/${currentUser.user_id}`,
+        baseURL: "http://localhost:8800",
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res.data.data);
+          setUserData(res.data.data);
+          setName(res.data.data.user.user_name);
+          setRoll(res.data.data.user.roll_no);
+          setHeadline(res.data.data.user.headline);
+        } else {
+          setUserData(null);
+        }
+        setIsLoading(false);
+      });
+    } catch (error) {
+      setUserData([]);
+      setIsLoading(true);
+      console.error(error);
+    }
+  }, []);
+
   async function handleUpdateImage() {
     try {
       const formData = new FormData();
@@ -102,6 +139,7 @@ function PersonalInformation() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
+                value={name}
                 type="text"
                 className="w-80 input input-bordered m-1"
                 placeholder="Update Name"
@@ -142,6 +180,7 @@ function PersonalInformation() {
                   setRoll(e.target.value);
                 }}
                 type="text"
+                value={roll_no}
                 className="w-80 input input-bordered m-1"
                 placeholder="Update Roll"
               />
@@ -163,6 +202,7 @@ function PersonalInformation() {
                 }}
                 class="w-full rounded-lg border-gray-200 p-3 text-sm"
                 placeholder="Update Headline"
+                value={headline}
                 rows="8"
                 id="description"
               ></textarea>

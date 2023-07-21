@@ -10,7 +10,7 @@ function Navbar() {
     <>
       <div className="navbar bg-base-100">
         <div className="navbar-start">
-          <div style={{zIndex:"10000"}} className="dropdown">
+          <div style={{ zIndex: "10000" }} className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,9 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">RUETians</Link>
+          <Link to="/" className="btn btn-ghost normal-case text-xl">
+            RUETians
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -65,14 +67,20 @@ function Navbar() {
           // if user is logged in
           currentUser ? (
             <div className="navbar-end">
-              <div style={{zIndex:"10000"}} className="dropdown dropdown-end">
+              <div
+                style={{ zIndex: "10000" }}
+                className="dropdown dropdown-end"
+              >
                 <div
                   tabIndex={0}
                   className="m-1 btn btn-ghost btn-md rounded-btn"
                 >
                   <div className="avatar">
                     <div className="rounded-full w-10 h-10 m-1">
-                      <img src="https://i.pravatar.cc/500?img=32" alt="img"/>
+                      <img
+                        src={`http://localhost:8800/${currentUser.image_url}`}
+                        alt="img"
+                      />
                     </div>
                   </div>
                 </div>

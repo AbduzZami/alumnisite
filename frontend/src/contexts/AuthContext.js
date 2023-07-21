@@ -83,7 +83,64 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  async function updateData() {
+    if (currentUser) {
+      try {
+        axios({
+          method: "get",
+          url: `/userbyid/${currentUser.user_id}`,
+          baseURL: "http://localhost:8800",
+        }).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            if (!isEqual(currentUser, res.data.data.user)) {
+              setCurrentUser(res.data.data.user);
+            }
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  const isEqual = (obj1, obj2) => {
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+
+    for (const key of keys1) {
+      console.log(obj1[key], obj2[key]);
+      if (obj1[key] !== obj2[key]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   useEffect(() => {
+    if (currentUser) {
+      try {
+        axios({
+          method: "get",
+          url: `/userbyid/${currentUser.user_id}`,
+          baseURL: "http://localhost:8800",
+        }).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            if (!isEqual(currentUser, res.data.data.user)) {
+              setCurrentUser(res.data.data.user);
+            }
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
@@ -94,6 +151,7 @@ export const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
+        updateData,
       }}
     >
       {children}

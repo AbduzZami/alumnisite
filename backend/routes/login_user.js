@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 router.post("/", async (req, res) => {
   try {
     connection.query(
-      `select users.user_id, users.user_name, users.email, users.password, users.roll_no, users.verification_status from users where email = '${req.body.email}'`,
+      `select users.user_id, users.user_name, users.email, users.password, users.roll_no, users.verification_status, users.image_url from users where email = '${req.body.email}'`,
       function (error, results, fields) {
         if (error) {
           res.status(500).send("Internal server error" + error);
@@ -27,6 +27,7 @@ router.post("/", async (req, res) => {
                 user_name: results[0].user_name,
                 email: results[0].email,
                 roll_no: results[0].roll_no,
+                image_url: results[0].image_url,
                 verification_status: results[0].verification_status,
               },
               process.env.JWT_SECRET,
