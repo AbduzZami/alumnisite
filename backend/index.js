@@ -6,6 +6,7 @@ const getAllUsers = require("./routes/get_all_users");
 const getUserById = require("./routes/get_user_by_id");
 const registerUser = require("./routes/register_user");
 const loginUser = require("./routes/login_user");
+const searchUser = require("./routes/search_users");
 const logout = require("./routes/logout");
 const updateName = require("./routes/edit_profile/update_name");
 const updateRoll = require("./routes/edit_profile/update_roll");
@@ -73,6 +74,7 @@ app.use("/uploads", express.static("uploads"));
 // app.set("view engine", "hbs");
 
 app.use("/users", getAllUsers);
+app.use("/users/search", searchUser);
 app.use("/userbyid", getUserById);
 app.use("/register", registerUser);
 app.use("/login", loginUser);

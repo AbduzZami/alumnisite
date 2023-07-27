@@ -8,54 +8,82 @@ import axios from "axios";
 function Community() {
   const [alumnies, setAlumnies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    try {
-      axios({
-        method: "get",
-        url: "/users",
-        baseURL: "http://localhost:8800",
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          console.log(res.data.data);
-          setAlumnies(res.data.data);
+    if (searchQuery.trim() === "") {
+      // No search query, show all alumni
+      setIsLoading(true);
+      try {
+        axios({
+          method: "get",
+          url: `/users`,
+          baseURL: "http://localhost:8800",
+          withCredentials: true,
+        }).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            console.log(res.data.data);
+            setAlumnies(res.data.data);
+          } else {
+            setAlumnies([]);
+          }
+          setIsLoading(false);
+        });
+      } catch (error) {
+        setAlumnies([]);
+        setIsLoading(false);
+        console.error(error);
+      }
+      return;
+    }
+
+    const fetchAlumni = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get("http://localhost:8800/users/search", {
+          params: {
+            parameter: searchQuery,
+          },
+        });
+        console.log(response);
+        if (response.status === 200) {
+          setAlumnies(response.data.data);
         } else {
           setAlumnies([]);
         }
-        setIsLoading(true);
-      });
-    } catch (error) {
-      setAlumnies([]);
-      setIsLoading(true);
-      console.error(error);
-    }
-  }, []);
+        setIsLoading(false);
+      } catch (error) {
+        setAlumnies([]);
+        setIsLoading(false);
+        console.error(error);
+      }
+    };
+
+    fetchAlumni();
+  }, [searchQuery]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    setSearchQuery(formData.get("searchfor"));
+  };
 
   return (
     <div>
       <Navbar />
       <div className="container mx-auto mb-5">
-        <form action="#">
+        <form onSubmit={handleSearch}>
           <div className="flex flex-wrap gap-4 m-5 justify-center">
-            {/* select start */}
-            {/* <select className="select select-bordered w-full max-w-xs">
-              <option disabled selected value="byname">
-                Who shot first?
-              </option>
-              <option value="byroll">Han Solo</option>
-              <option value="bywork">Greedo</option>
-            </select> */}
-            {/* select end */}
-
             <input
               type="text"
               name="searchfor"
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
-
-            <button className="btn">Search</button>
+            <button type="submit" className="btn">
+              Search
+            </button>
           </div>
         </form>
         <hr
@@ -69,7 +97,7 @@ function Community() {
         />
 
         {/* check if is loading */}
-        {isLoading ? (
+        {!isLoading ? (
           <div className="flex flex-wrap gap-4">
             {
               // if alumnies is not empty or null

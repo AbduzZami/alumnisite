@@ -14,6 +14,7 @@ function Profile() {
 
   useEffect(() => {
     try {
+      console.log(id);
       axios({
         method: "get",
         url: `/userbyid/${id}`,

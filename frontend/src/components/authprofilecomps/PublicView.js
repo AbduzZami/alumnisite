@@ -37,9 +37,9 @@ function PublicView() {
   }, []);
 
   return (
-    <div className="container ">
+    <div className="">
       <Navbar />
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap container">
         <SideBar />
         {!isLoading ? (
           <div className=" my-10 w-4/5 md:w-3/5 lg:w-4/5">
