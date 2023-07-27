@@ -1,10 +1,12 @@
 import { createContext, useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
@@ -24,6 +26,8 @@ export const AuthProvider = ({ children }) => {
         console.log(res);
         if (res.status === 200) {
           setCurrentUser(res.data.data);
+          toast(res.data.message);
+          navigate("/");
         }
       });
     } catch (error) {
@@ -31,27 +35,29 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  async function register(user_name, email, password, roll_no) {
-    try {
-      axios({
-        method: "post",
-        url: "/admin/register",
-        baseURL: "http://localhost:8800",
-        data: {
-          user_name: user_name,
-          password: password,
-          roll_no: roll_no,
-        },
-      }).then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setCurrentUser(res.data.data);
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function register(user_name, email, password, roll_no) {
+  //   try {
+  //     axios({
+  //       method: "post",
+  //       url: "/admin/register",
+  //       baseURL: "http://localhost:8800",
+  //       data: {
+  //         user_name: user_name,
+  //         password: password,
+  //         roll_no: roll_no,
+  //       },
+  //     }).then((res) => {
+  //       console.log(res);
+  //       if (res.status === 200) {
+  //         setCurrentUser(res.data.data);
+  //         toast(res.data.message);
+  //         navigate("/");
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   async function logout() {
     try {
@@ -63,6 +69,8 @@ export const AuthProvider = ({ children }) => {
         console.log(res);
         if (res.status === 200) {
           setCurrentUser(null);
+          toast(res.data.message);
+          navigate("/");
         }
       });
     } catch (error) {
@@ -79,7 +87,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         currentUser,
         login,
-        register,
         logout,
       }}
     >

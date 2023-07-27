@@ -4,10 +4,10 @@ import axios from "axios";
 import SideBar from "../sidebar";
 import Navbar from "../Navbar";
 
-function General() {
-  const [name, setName] = useState("");
-  const [roll_no, setRoll] = useState("");
-  const [headline, setHeadline] = useState("");
+function General(props) {
+  const [name, setName] = useState(props.user.user.user_name);
+  const [roll_no, setRoll] = useState(props.user.user.roll_no);
+  const [headline, setHeadline] = useState(props.user.user.headline);
   async function handleUpdateName() {
     try {
       await axios({
@@ -74,6 +74,7 @@ function General() {
                   setName(e.target.value);
                 }}
                 type="text"
+                value={name}
                 className="w-80 input input-bordered m-1"
                 placeholder="Update Name"
               />
@@ -93,6 +94,7 @@ function General() {
                 onChange={(e) => {
                   setRoll(e.target.value);
                 }}
+                value={roll_no}
                 type="text"
                 className="w-80 input input-bordered m-1"
                 placeholder="Update Roll"
@@ -115,6 +117,7 @@ function General() {
                 }}
                 class="w-full rounded-lg border-gray-200 p-3 text-sm"
                 placeholder="Update Headline"
+                value={headline}
                 rows="8"
                 id="description"
               ></textarea>

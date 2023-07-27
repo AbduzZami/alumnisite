@@ -9,6 +9,8 @@ import General from "../components/useredit/General";
 import EditEducation from "../components/useredit/EditEducation";
 import EditWork from "../components/useredit/EditWork";
 import ChangeStatus from "../components/useredit/ChangeStatus";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,63 +46,92 @@ function a11yProps(index) {
 }
 
 export default function UserEditPage() {
+  const { id } = useParams();
   const [value, setValue] = React.useState(0);
+  const [user_data, setUser] = React.useState(null);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  React.useEffect(() => {
+    axios
+      .get(`http://localhost:8800/userbyid/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res.data.data);
+          setUser(res.data.data);
+        } else {
+          setUser(null);
+        }
+      })
+      .catch((error) => {
+        setUser(null);
+        console.error(error);
+      });
+  }, [id]);
+
   return (
     <div className="flex flex-wrap">
       <SideBar />
-      <div className="m-5">
-        <div className="text-sm breadcrumbs mb-10">
-          <ul>
-            <li>
-              <a href="/posts">Users</a>
-            </li>
-            <li>0</li>
-          </ul>
-        </div>
-        <Box>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label="General" {...a11yProps(0)} />
-              <Tab label="Status" {...a11yProps(1)} />
-              <Tab label="Works" {...a11yProps(2)} />
-              <Tab label="Education" {...a11yProps(3)} />
-              <Tab label="Socials" {...a11yProps(4)} />
-              <Tab label="Phones" {...a11yProps(5)} />
-              <Tab label="Emails" {...a11yProps(6)} />
-            </Tabs>
-          </Box>
-          <TabPanel value={value} index={0}>
-            <General />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <ChangeStatus />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <EditWork />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <EditEducation />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            Item Three
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            Item Three
-          </TabPanel>
-          <TabPanel value={value} index={6}>
-            Item Three
-          </TabPanel>
-        </Box>
-      </div>
+      {
+        // if user_data is not empty or null
+        user_data ? (
+          <div className="m-5">
+            <div className="text-sm breadcrumbs mb-10">
+              <ul>
+                <li>
+                  <a href="/users">Users</a>
+                </li>
+                <li>0</li>
+              </ul>
+            </div>
+            <Box>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab label="General" {...a11yProps(0)} />
+                  <Tab label="Status" {...a11yProps(1)} />
+                  <Tab label="Works" {...a11yProps(2)} />
+                  <Tab label="Education" {...a11yProps(3)} />
+                  <Tab label="Socials" {...a11yProps(4)} />
+                  <Tab label="Phones" {...a11yProps(5)} />
+                  <Tab label="Emails" {...a11yProps(6)} />
+                </Tabs>
+              </Box>
+              <TabPanel value={value} index={0}>
+                <General user={user_data} />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <ChangeStatus user={user_data} />
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                <EditWork user={user_data} />
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                <EditEducation user={user_data} />
+              </TabPanel>
+              <TabPanel value={value} index={4}>
+                Item Three
+              </TabPanel>
+              <TabPanel value={value} index={5}>
+                Item Three
+              </TabPanel>
+              <TabPanel value={value} index={6}>
+                Item Three
+              </TabPanel>
+            </Box>
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">
+            <h1 className="text-2xl">No User Found</h1>
+          </div>
+        )
+      }
     </div>
   );
 }

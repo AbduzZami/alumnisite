@@ -50,6 +50,9 @@ const adminLogin = require("./routes/admin_routes/login_admin.js");
 const addUserByAdmin = require("./routes/admin_routes/add_user.js");
 const editUserByAdmin = require("./routes/admin_routes/edit_user.js");
 const changeUserStatus = require("./routes/admin_routes/change_user_status.js");
+const changePostStatus = require("./routes/admin_routes/set_post_status.js");
+const adminLogout = require("./routes/admin_routes/logout_admin.js");
+const adminPost = require("./routes/admin_routes/add_post_admin.js");
 
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -106,6 +109,9 @@ app.use("/edit_profile/update_phone", updatePhone);
 app.use("/edit_profile/add_email", addEmail);
 app.use("/edit_profile/delete_email", deleteEmail);
 app.use("/edit_profile/update_email", updateEmail);
+app.use("/admin/set_post_status", changePostStatus);
+app.use("/admin/logout", adminLogout);
+app.use("/admin/add_post", adminPost);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

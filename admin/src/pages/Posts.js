@@ -1,42 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../components/sidebar";
 import axios from "axios";
-import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
 function Posts() {
-  const [posts, setPosts] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
+  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(currentUser.user_id);
-  //   try {
-  //     axios({
-  //       method: "get",
-  //       url: `/posts/my`,
-  //       baseURL: "http://localhost:8800",
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //       if (res.status === 200) {
-  //         console.log(res.data.data);
-  //         setPosts(res.data.data);
-  //       } else {
-  //         setPosts(null);
-  //       }
-  //       setIsLoading(false);
-  //     });
-  //   } catch (error) {
-  //     setPosts([]);
-  //     setIsLoading(true);
-  //     console.error(error);
-  //   }
-  // }, []);
+  useEffect(() => {
+    try {
+      axios({
+        method: "get",
+        url: "/posts",
+        baseURL: "http://localhost:8800",
+      }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log(res.data.data);
+          setPosts(res.data.data);
+        } else {
+          setPosts([]);
+        }
+        setIsLoading(true);
+      });
+    } catch (error) {
+      setPosts([]);
+      setIsLoading(true);
+      console.error(error);
+    }
+  }, []);
 
   return (
     <div>
@@ -48,159 +45,85 @@ function Posts() {
             <p className="font-bold">Posts</p>
 
             <div>
-              <a href="/newsevents/createpost" className="font-bold">
+              <Link to="/addpost" className="font-bold">
                 [Add New Post]
-              </a>
+              </Link>
             </div>
           </div>
           <hr className="h-px bg-black border-0" />
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-              <thead class="ltr:text-left rtl:text-right">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+              <thead className="ltr:text-left rtl:text-right">
                 <tr>
-                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    Name
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    Image
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    Email
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    Headline
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    Created On
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    Description
                   </th>
-                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    Time
+                  </th>
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    Status
+                  </th>
+                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                     Actions
                   </th>
                 </tr>
               </thead>
 
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    John Doe
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    24/05/1995
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    Web Developer
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <Link className="" to="/posts/1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                    </Link>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    Jane Doe
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    04/11/1980
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    Web Designer
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <div className="">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    Gary Barlow
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    24/05/1995
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    Singer
-                  </td>
-                  <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <div className="flex flex-wrap">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                    </div>
-                  </td>
-                </tr>
+              <tbody className="divide-y divide-gray-200">
+                {isLoading ? (
+                  posts.length > 0 ? (
+                    posts.map((post) => (
+                      <tr key={post.id}>
+                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          <img
+                            src={`http://localhost:8800/${post.image_url}`}
+                            alt={post.title}
+                            className="w-10 h-10 rounded-md"
+                          />
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {post.title}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {post.description.substring(0, 50)}...
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {post.created_on}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          {post.status}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                          <Link to={`/posts/${post.post_id}`}>
+                            <button>Edit</button>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                        No posts available.
+                      </td>
+                    </tr>
+                  )
+                ) : (
+                  <tr>
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      Loading...
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
-          {/* <table className="table-auto w-full ">
-            <thead>
-              <tr className="">
-                <th>Image</th>
-                <th>Headline</th>
-                <th>Description</th>
-                <th>Time</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                // if alumnies is not empty or null
-                isLoading === false && posts !== null && posts !== undefined ? (
-                  posts.map((post) => (
-                    <tr>
-                      <td>shsdfjsfdkjnk</td>
-                      <td>fsfsdsdffd</td>
-                      <td>fsfdsdffsfdsxddd</td>
-                      <td>454545</td>
-                      <td>Edit</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td>shsdfjsfdkjnk</td>
-                    <td>fsfsdsdffd</td>
-                    <td>fsfdsdffsfdsxddd</td>
-                    <td>454545</td>
-                    <td>Edit</td>
-                  </tr>
-                )
-              }{" "}
-            </tbody>
-          </table> */}
         </section>
       </div>
     </div>

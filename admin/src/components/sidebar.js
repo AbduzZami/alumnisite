@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 function SideBar() {
   const { currentUser } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   return (
     <div className="w-full md:w-1/4 lg:w-1/6">
       <div class="flex h-screen flex-col justify-between border-e bg-white">
@@ -160,14 +161,13 @@ function SideBar() {
                   </li>
 
                   <li>
-                    <form action="/logout">
-                      <button
-                        type="submit"
-                        class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                      >
-                        Logout
-                      </button>
-                    </form>
+                    <button
+                      type="submit"
+                      onClick={() => logout()}
+                      class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </details>
