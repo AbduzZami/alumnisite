@@ -3,24 +3,13 @@ const router = express.Router();
 var connection = require("../../connection.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
 router.patch("/", async (req, res) => {
   const user_id = req.body.user_id;
   const user_name = req.body.user_name;
   const email = req.body.email;
   const roll_no = req.body.roll_no;
 
-  if (
-    user_id === undefined ||
-    user_name === undefined ||
-    email === undefined ||
-    user_id === "" ||
-    user_name === "" ||
-    email === "" ||
-    user_id === null ||
-    user_name === null ||
-    email === null
-  ) {
+  if (!(user_id && (user_name || email || roll_no))) {
     res.status(500).json({
       message: "Invalid request",
     });
@@ -51,7 +40,14 @@ router.patch("/", async (req, res) => {
                 message: "You are not an admin",
               });
             } else {
-              var sql = `update users set user_name = '${user_name}', email = '${email}', roll_no = '${roll_no}'  where users.user_id = '${user_id}'`;
+              // Build the update query based on the fields that are not null, empty, or undefined
+              var sql = `update users set `;
+              const updateFields = [];
+              if (user_name) updateFields.push(`user_name = '${user_name}'`);
+              if (email) updateFields.push(`email = '${email}'`);
+              if (roll_no) updateFields.push(`roll_no = '${roll_no}'`);
+              sql +=
+                updateFields.join(", ") + ` where users.user_id = '${user_id}'`;
 
               console.log(req.body);
 

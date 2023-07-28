@@ -12,10 +12,11 @@ function General(props) {
     try {
       await axios({
         method: "patch",
-        url: "/edit_profile/update_name",
+        url: "/admin/edituser",
         baseURL: "http://localhost:8800",
         data: {
           user_name: name,
+          user_id: props.user.user.user_id,
         },
         withCredentials: true,
       }).then((res) => {
@@ -30,10 +31,11 @@ function General(props) {
     try {
       await axios({
         method: "patch",
-        url: "/edit_profile/update_roll",
+        url: "/admin/edituser",
         baseURL: "http://localhost:8800",
         data: {
           roll_no: roll_no,
+          user_id: props.user.user.user_id,
         },
         withCredentials: true,
       }).then((res) => {
@@ -48,10 +50,11 @@ function General(props) {
     try {
       await axios({
         method: "patch",
-        url: "/edit_profile/set_headline",
+        url: "/admin/set_headline",
         baseURL: "http://localhost:8800",
         data: {
           headline: headline,
+          user_id: props.user.user.user_id,
         },
         withCredentials: true,
       }).then((res) => {

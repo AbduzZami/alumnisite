@@ -53,6 +53,7 @@ const changeUserStatus = require("./routes/admin_routes/change_user_status.js");
 const changePostStatus = require("./routes/admin_routes/set_post_status.js");
 const adminLogout = require("./routes/admin_routes/logout_admin.js");
 const adminPost = require("./routes/admin_routes/add_post_admin.js");
+const adminSetHeadline = require("./routes/admin_routes/set_headline.js");
 
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -112,6 +113,7 @@ app.use("/edit_profile/update_email", updateEmail);
 app.use("/admin/set_post_status", changePostStatus);
 app.use("/admin/logout", adminLogout);
 app.use("/admin/add_post", adminPost);
+app.use("/admin/set_headline", adminSetHeadline);
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
