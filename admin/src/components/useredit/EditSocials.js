@@ -1,111 +1,98 @@
 import React, { useState } from "react";
-import SideBar from "../sidebar";
 import axios from "axios";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import Navbar from "../Navbar";
-import { toast } from "react-hot-toast";
+import SideBar from "../sidebar";
 
-function EditEducation(props) {
-  const [edu_id, seteduID] = useState("");
-  const [institute, setinstitute] = useState("");
-  const [degree, setdegree] = useState("");
-  const [start_year, setStartYear] = useState("");
-  const [end_year, setEndYear] = useState("");
+function EditSocials(props) {
+  const [social_id, setSocialID] = useState("");
+  const [category, setCategory] = useState("");
+  const [link, setLink] = useState("");
   const [userData, setUserData] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(currentUser.user_id);
-  //   try {
-  //     axios({
-  //       method: "get",
-  //       url: `/userbyid/${currentUser.user_id}`,
-  //       baseURL: "http://localhost:8800",
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //       if (res.status === 200) {
-  //         console.log(res.data.data);
-  //         setUserData(res.data.data);
-  //       } else {
-  //         setUserData(null);
-  //       }
-  //       setIsLoading(false);
-  //     });
-  //   } catch (error) {
-  //     setUserData([]);
-  //     setIsLoading(true);
-  //     console.error(error);
-  //   }
-  // }, []);
+  //   useEffect(() => {
+  //     console.log(currentUser.user_id);
+  //     try {
+  //       axios({
+  //         method: "get",
+  //         url: `/userbyid/${currentUser.user_id}`,
+  //         baseURL: "http://localhost:8800",
+  //         withCredentials: true,
+  //       }).then((res) => {
+  //         console.log(res);
+  //         if (res.status === 200) {
+  //           console.log(res.data.data);
+  //           setUserData(res.data.data);
+  //           // refresh page
+  //         } else {
+  //           setUserData(null);
+  //         }
+  //         setIsLoading(false);
+  //       });
+  //     } catch (error) {
+  //       setUserData([]);
+  //       setIsLoading(true);
+  //       console.error(error);
+  //     }
+  //   }, [currentUser]);
 
-  async function handleAddEducation() {
+  async function handleAddSocial() {
     try {
       await axios({
         method: "post",
-        url: "/admin/add_education",
+        url: "/admin/add_social",
         baseURL: "http://localhost:8800",
         data: {
           user_id: props.user.user.user_id,
-          institute: institute,
-          degree: degree,
-          start_year: start_year,
-          end_year: end_year,
+          category: category,
+          link: link,
         },
         withCredentials: true,
       }).then((res) => {
-        toast.success(res.data.message);
-        window.location.reload();
         console.log(res);
+        // window.location.reload();
       });
     } catch (error) {
       console.error(error);
     }
   }
-  async function handleUpdateEducation(edu_id) {
+  async function handleUpdateSocial(edu_id) {
     try {
       await axios({
         method: "patch",
-        url: "/admin/update_education",
+        url: "/admin/update_social",
         baseURL: "http://localhost:8800",
         data: {
           user_id: props.user.user.user_id,
-          edu_id: edu_id,
-          institute: institute,
-          degree: degree,
-          start_year: start_year,
-          end_year: end_year,
+          social_id: social_id,
+          category: category,
+          link: link,
         },
         withCredentials: true,
       }).then((res) => {
-        toast.success(res.data.message);
-        window.location.reload();
         console.log(res);
+        window.location.reload();
       });
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleDeleteEducation(edu_id) {
+  async function handleDeleteSocial(edu_id) {
     try {
       await axios({
         method: "delete",
-        url: "/admin/delete_education",
+        url: "/admin/delete_social",
         baseURL: "http://localhost:8800",
-        data: {
-          user_id: props.user.user.user_id,
-          edu_id: edu_id,
-        },
+        data: { user_id: props.user.user.user_id, social_id: social_id },
         withCredentials: true,
       }).then((res) => {
-        toast.success(res.data.message);
-        window.location.reload();
         console.log(res);
+        window.location.reload();
       });
     } catch (error) {
       console.error(error);
@@ -117,7 +104,7 @@ function EditEducation(props) {
       <div className="flex flex-wrap">
         <section className="m-5 w-full">
           <div className="flex justify-between flex-wrap">
-            <p className="font-bold">Educations</p>
+            <p className="font-bold">Socials</p>
 
             <div>
               <p
@@ -131,42 +118,42 @@ function EditEducation(props) {
                 <form method="dialog" className="modal-box">
                   <h3 className="font-bold text-lg">Hello!</h3>
                   <p className="py-4">
-                    <input
+                    <select
                       onChange={(e) => {
-                        setinstitute(e.target.value);
+                        console.log(e.target.value);
+                        setCategory(e.target.value);
+                      }}
+                      className="select select-bordered w-full max-w-xs"
+                    >
+                      <option disabled selected>
+                        Select Category
+                      </option>
+                      <option>Facebook</option>
+                      <option>Instagram</option>
+                      <option>LinkedIn</option>
+                      <option>Twitter</option>
+                      <option>Youtube</option>
+                      <option>Website</option>
+                    </select>
+                    {/* <input
+                      onChange={(e) => {
+                        setCategory(e.target.value);
                       }}
                       type="text"
                       className="w-80 input w-full input-bordered m-1"
                       placeholder="institute"
-                    />
+                    /> */}
                     <input
                       onChange={(e) => {
-                        setdegree(e.target.value);
+                        setLink(e.target.value);
                       }}
                       type="text"
                       className="w-80 input w-full input-bordered m-1"
                       placeholder="degree"
                     />
-                    <div className="flex flex-wrap gap-2 m-1">
-                      <input
-                        onChange={(e) => {
-                          setStartYear(e.target.value);
-                        }}
-                        type="text"
-                        className="w-36 input w-full input-bordered"
-                        placeholder="Start"
-                      />
-                      <input
-                        onChange={(e) => {
-                          setEndYear(e.target.value);
-                        }}
-                        type="text"
-                        className="w-36 input w-full input-bordered "
-                        placeholder="End"
-                      />
-                    </div>
+
                     <button
-                      onClick={handleAddEducation}
+                      onClick={handleAddSocial}
                       className=" btn btn-success m-1"
                     >
                       Add
@@ -184,27 +171,21 @@ function EditEducation(props) {
 
           {
             // if alumnies is not empty or null
+            props.user !== null && props.user !== undefined ? (
+              props.user.socials.map((social) => (
+                <div className="my-2" key={social.social_id}>
+                  <p>{social.category}</p>
+                  <p>{social.link}</p>
 
-            props.user.educations !== null &&
-            props.user.educations !== undefined ? (
-              props.user.educations.map((edu) => (
-                <div className="my-2" key={edu.edu_id}>
-                  <p>{edu.institute}</p>
-                  <p>{edu.degree}</p>
-                  <p>
-                    {edu.start_year} {"-"} {edu.end_year}
-                  </p>
                   <div className="flex flex-wrap gap-2">
                     <div>
                       <p
                         className="font-bold"
-                        key={edu.edu_id}
+                        key={social.social_id}
                         onClick={() => {
-                          seteduID(edu.edu_id);
-                          setinstitute(edu.institute);
-                          setdegree(edu.degree);
-                          setStartYear(edu.start_year);
-                          setEndYear(edu.end_year);
+                          setSocialID(social.social_id);
+                          setCategory(social.category);
+                          setLink(social.link);
                           window.my_modal_edit_edu.showModal();
                         }}
                       >
@@ -215,7 +196,7 @@ function EditEducation(props) {
                       <p
                         className="font-bold"
                         onClick={() => {
-                          seteduID(edu.edu_id);
+                          setSocialID(social.social_id);
                           window.my_modal_delete_edu.showModal();
                         }}
                       >
@@ -227,7 +208,7 @@ function EditEducation(props) {
               ))
             ) : (
               <div className="flex justify-center items-center">
-                <h1 className="text-2xl">No edus Found</h1>
+                <h1 className="text-2xl">No Socials Found</h1>
               </div>
             )
           }
@@ -237,7 +218,7 @@ function EditEducation(props) {
               <h3 className="font-bold text-lg">Do you want to delete?</h3>
               <p className="py-4">
                 <button
-                  onClick={() => handleDeleteEducation(edu_id)}
+                  onClick={() => handleDeleteSocial(social_id)}
                   className=" btn btn-success m-1"
                 >
                   Yes
@@ -254,46 +235,33 @@ function EditEducation(props) {
             <form method="dialog" className="modal-box">
               <h3 className="font-bold text-lg">Hello!</h3>
               <p className="py-4">
+                <select
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option disabled selected>
+                    Select Category
+                  </option>
+                  <option>Facebook</option>
+                  <option>Instagram</option>
+                  <option>LinkedIn</option>
+                  <option>Twitter</option>
+                  <option>Youtube</option>
+                  <option>Website</option>
+                </select>
                 <input
                   onChange={(e) => {
-                    setinstitute(e.target.value);
+                    setLink(e.target.value);
                   }}
-                  value={institute}
-                  type="text"
-                  className="w-80 input w-full input-bordered m-1"
-                  placeholder="institute"
-                />
-                <input
-                  onChange={(e) => {
-                    setdegree(e.target.value);
-                  }}
-                  value={degree}
+                  value={link}
                   type="text"
                   className="w-80 input w-full input-bordered m-1"
                   placeholder="degree"
                 />
-                <div className="flex flex-wrap gap-2 m-1">
-                  <input
-                    onChange={(e) => {
-                      setStartYear(e.target.value);
-                    }}
-                    value={start_year}
-                    type="text"
-                    className="w-36 input w-full input-bordered"
-                    placeholder="Start"
-                  />
-                  <input
-                    onChange={(e) => {
-                      setEndYear(e.target.value);
-                    }}
-                    value={end_year}
-                    type="text"
-                    className="w-36 input w-full input-bordered "
-                    placeholder="End"
-                  />
-                </div>
                 <button
-                  onClick={() => handleUpdateEducation(edu_id)}
+                  onClick={() => handleUpdateSocial(social_id)}
                   className=" btn btn-success m-1"
                 >
                   Update
@@ -311,4 +279,4 @@ function EditEducation(props) {
   );
 }
 
-export default EditEducation;
+export default EditSocials;

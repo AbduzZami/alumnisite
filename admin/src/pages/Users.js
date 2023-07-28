@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../components/sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function Users() {
   const [alumnies, setAlumnies] = useState([]);
@@ -28,6 +29,35 @@ function Users() {
     fetchUsersData();
   }, []);
 
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [rollNo, setRollNo] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleAddUser = async () => {
+    try {
+      await axios({
+        method: "post",
+        url: "/admin/adduser",
+        baseURL: "http://localhost:8800",
+        data: {
+          user_name: username,
+          email: email,
+          roll_no: rollNo,
+          password: password,
+        },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className="flex flex-wrap">
       <SideBar />
@@ -37,9 +67,64 @@ function Users() {
           <p className="font-bold">Users</p>
 
           <div>
-            <Link to="/newsevents/createpost" className="font-bold">
+            <p
+              className="font-bold"
+              onClick={() => window.my_modal_add_user.showModal()}
+            >
               [Add New User]
-            </Link>
+            </p>
+
+            <dialog id="my_modal_add_user" className="modal">
+              <form method="dialog" className="modal-box">
+                <h3 className="font-bold text-lg">Hello!</h3>
+                <p className="py-4">
+                  <input
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                    type="text"
+                    className="w-80 input w-full input-bordered m-1"
+                    placeholder="User Name"
+                  />
+                  <input
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    type="text"
+                    className="w-80 input w-full input-bordered m-1"
+                    placeholder="Email"
+                  />
+                  <div className="flex flex-wrap gap-2 m-1">
+                    <input
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      type="text"
+                      className="w-36 input w-full input-bordered"
+                      placeholder="Password"
+                    />
+                    <input
+                      onChange={(e) => {
+                        setRollNo(e.target.value);
+                      }}
+                      type="text"
+                      className="w-36 input w-full input-bordered "
+                      placeholder="Roll No"
+                    />
+                  </div>
+                  <button
+                    onClick={handleAddUser}
+                    className=" btn btn-success m-1"
+                  >
+                    Add User
+                  </button>
+                  <button className=" btn btn-cancel m-1">Cancel</button>
+                </p>
+              </form>
+              <div method="dialog" className="modal-backdrop">
+                <button>close</button>
+              </div>
+            </dialog>
           </div>
         </div>
         <hr className="h-px bg-black border-0" />

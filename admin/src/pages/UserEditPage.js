@@ -11,6 +11,9 @@ import EditWork from "../components/useredit/EditWork";
 import ChangeStatus from "../components/useredit/ChangeStatus";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import EditSocials from "../components/useredit/EditSocials";
+import EditEmails from "../components/useredit/EditEmails";
+import EditPhones from "../components/useredit/EditPhones";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,7 +87,7 @@ export default function UserEditPage() {
                 <li>
                   <a href="/users">Users</a>
                 </li>
-                <li>0</li>
+                <li> {id}</li>
               </ul>
             </div>
             <Box>
@@ -116,13 +119,13 @@ export default function UserEditPage() {
                 <EditEducation user={user_data} />
               </TabPanel>
               <TabPanel value={value} index={4}>
-                Item Three
+                <EditSocials user={user_data} />
               </TabPanel>
               <TabPanel value={value} index={5}>
-                Item Three
+                <EditPhones user={user_data} />
               </TabPanel>
               <TabPanel value={value} index={6}>
-                Item Three
+                <EditEmails user={user_data} />
               </TabPanel>
             </Box>
           </div>

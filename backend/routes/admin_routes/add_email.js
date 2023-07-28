@@ -6,24 +6,20 @@ const connection = require("../../connection");
 
 router.post("/", async (req, res) => {
   try {
-    const { user_id, institute, degree, start_year, end_year } = req.body;
+    const user_id = req.body.user_id;
+    const category = req.body.category;
+    const email = req.body.email;
 
     if (
       user_id === undefined ||
+      category === undefined ||
+      email === undefined ||
       user_id === "" ||
+      category === "" ||
+      email === "" ||
       user_id === null ||
-      institute === undefined ||
-      degree === undefined ||
-      start_year === undefined ||
-      end_year === undefined ||
-      institute === "" ||
-      degree === "" ||
-      start_year === "" ||
-      end_year === "" ||
-      institute === null ||
-      degree === null ||
-      start_year === null ||
-      end_year === null
+      category === null ||
+      email === null
     ) {
       res.status(500).json({
         message: "Invalid request",
@@ -54,17 +50,9 @@ router.post("/", async (req, res) => {
                 message: "You are not an admin",
               });
             } else {
-              var sql = `insert into educations ( user_id, institute, degree, start_year, end_year ) values ?`;
+              var sql = `insert into emails ( user_id, category, email ) values  ?`;
 
-              var values = [
-                [
-                  req.body.user_id,
-                  req.body.institute,
-                  req.body.degree,
-                  req.body.start_year,
-                  req.body.end_year,
-                ],
-              ];
+              var values = [[user_id, category, email]];
 
               console.log(req.body);
 
@@ -75,7 +63,7 @@ router.post("/", async (req, res) => {
                   });
                 } else {
                   res.status(200).json({
-                    message: "Education added successfully",
+                    message: "Email added successfully",
                   });
                 }
               });

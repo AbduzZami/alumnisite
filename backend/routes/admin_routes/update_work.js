@@ -5,24 +5,20 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.patch("/", async (req, res) => {
-  const work_id = req.body.work_id;
-  const company = req.body.company;
-  const designation = req.body.designation;
-  const start_year = req.body.start_year;
-  const end_year = req.body.end_year;
+  const { user_id, company, designation, start_year, end_year } = req.body;
 
   if (
-    work_id === undefined ||
+    user_id === undefined ||
     company === undefined ||
     designation === undefined ||
     start_year === undefined ||
     end_year === undefined ||
-    work_id === "" ||
+    user_id === "" ||
     company === "" ||
     designation === "" ||
     start_year === "" ||
     end_year === "" ||
-    work_id === null ||
+    user_id === null ||
     company === null ||
     designation === null ||
     start_year === null ||
@@ -50,7 +46,7 @@ router.patch("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `update works set company = '${company}' , designation = '${designation}' , start_year = '${start_year}', end_year = '${end_year}' where works.work_id = ${work_id} and works.user_id = ${decoded.user_id}`;
+        var sql = `update works set company = '${company}' , designation = '${designation}' , start_year = '${start_year}', end_year = '${end_year}' where works.work_id = ${work_id} and works.user_id = ${req.body.user_id}`;
 
         console.log(req.body);
 

@@ -4,25 +4,16 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
-router.patch("/", async (req, res) => {
-  const { user_id, institute, degree, start_year, end_year } = req.body;
+router.delete("/", async (req, res) => {
+  const { user_id, email_id } = req.body;
 
   if (
-    edu_id === undefined ||
-    institute === undefined ||
-    degree === undefined ||
-    start_year === undefined ||
-    end_year === undefined ||
-    edu_id === "" ||
-    institute === "" ||
-    degree === "" ||
-    start_year === "" ||
-    end_year === "" ||
-    edu_id === null ||
-    institute === null ||
-    degree === null ||
-    start_year === null ||
-    end_year === null
+    user_id === undefined ||
+    user_id === "" ||
+    user_id === null ||
+    email_id === undefined ||
+    email_id === "" ||
+    email_id === null
   ) {
     res.status(500).json({
       message: "Invalid request",
@@ -45,8 +36,17 @@ router.patch("/", async (req, res) => {
         });
         return;
       } else {
-        console.log("Connected to the database");
-        var sql = `update educations set institute = '${institute}' , degree = '${degree}' , start_year = '${start_year}', end_year = '${end_year}' where educations.edu_id = ${edu_id} and educations.user_id = ${req.body.user_id}`;
+        var sql = `delete from emails where email_id = ${email_id} and user_id = ${user_id}`;
+
+        // var values = [
+        //   [
+        //     req.body.user_id,
+        //     req.body.company,
+        //     req.body.designation,
+        //     req.body.start_year,
+        //     req.body.end_year,
+        //   ],
+        // ];
 
         console.log(req.body);
 
@@ -57,7 +57,7 @@ router.patch("/", async (req, res) => {
             });
           } else {
             res.status(200).json({
-              message: "Education updated successfully",
+              message: "Email deleted successfully",
             });
           }
         });

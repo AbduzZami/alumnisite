@@ -5,32 +5,33 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.post("/", async (req, res) => {
-  const company = req.body.company;
-  const designation = req.body.designation;
-  const start_year = req.body.start_year;
-  const end_year = req.body.end_year;
-
-  if (
-    company === undefined ||
-    designation === undefined ||
-    start_year === undefined ||
-    end_year === undefined ||
-    company === "" ||
-    designation === "" ||
-    start_year === "" ||
-    end_year === "" ||
-    company === null ||
-    designation === null ||
-    start_year === null ||
-    end_year === null
-  ) {
-    res.status(500).json({
-      message: "Invalid request",
-    });
-    return;
-  }
   try {
+    const { user_id, company, designation, start_year, end_year } = req.body;
+
+    if (
+      user_id === undefined ||
+      company === undefined ||
+      designation === undefined ||
+      start_year === undefined ||
+      end_year === undefined ||
+      user_id === "" ||
+      company === "" ||
+      designation === "" ||
+      start_year === "" ||
+      end_year === "" ||
+      user_id === null ||
+      company === null ||
+      designation === null ||
+      start_year === null ||
+      end_year === null
+    ) {
+      res.status(500).json({
+        message: "Invalid request",
+      });
+      return;
+    }
     const token = req.cookies.access_token;
+    console.log(req);
     if (!token) {
       res.status(401).json({
         message: "Unauthorized Access",
@@ -45,32 +46,44 @@ router.post("/", async (req, res) => {
         });
         return;
       } else {
-        console.log("Connected to the database");
-        var sql = `insert into works ( user_id, company, designation, start_year, end_year ) values ?`;
+        connection.query(
+          `select * from admins where admins.admin_id = '${decoded.admin_id}' and admins.user_name = '${decoded.user_name}'`,
+          function (error, result, fields) {
+            if (error) {
+              res.status(500).json({
+                message: "You are not an admin",
+              });
+            } else {
+              console.log("Connected to the database");
+              var sql = `insert into works ( user_id, company, designation, start_year, end_year ) values ?`;
 
-        var values = [
-          [
-            decoded.user_id,
-            req.body.company,
-            req.body.designation,
-            req.body.start_year,
-            req.body.end_year,
-          ],
-        ];
+              var values = [
+                [
+                  req.body.user_id,
+                  req.body.company,
+                  req.body.designation,
+                  req.body.start_year,
+                  req.body.end_year,
+                ],
+              ];
 
-        console.log(req.body);
+              console.log(req.body);
 
-        connection.query(sql, [values], function (error, result, fields) {
-          if (error) {
-            res.status(500).json({
-              message: error.sqlMessage,
-            });
-          } else {
-            res.status(200).json({
-              message: "Work added successfully",
-            });
+              connection.query(sql, [values], function (error, result, fields) {
+                if (error) {
+                  res.status(500).json({
+                    message: error.sqlMessage,
+                  });
+                } else {
+                  res.status(200).json({
+                    message: "Work added successfully",
+                  });
+                }
+              });
+            }
           }
-        });
+        );
+        // new
       }
     });
   } catch (error) {

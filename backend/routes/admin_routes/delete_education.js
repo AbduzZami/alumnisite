@@ -5,9 +5,9 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.delete("/", async (req, res) => {
-  const edu_id = req.body.edu_id;
+  const { user_id } = req.body;
 
-  if (edu_id === undefined || edu_id === "" || edu_id === null) {
+  if (user_id === undefined || user_id === "" || user_id === null) {
     res.status(500).json({
       message: "Invalid request",
     });
@@ -29,18 +29,7 @@ router.delete("/", async (req, res) => {
         });
         return;
       } else {
-        console.log("Connected to the database");
-        var sql = `delete from educations where edu_id = ${edu_id} and user_id = ${decoded.user_id}`;
-
-        // var values = [
-        //   [
-        //     req.body.user_id,
-        //     req.body.company,
-        //     req.body.designation,
-        //     req.body.start_year,
-        //     req.body.end_year,
-        //   ],
-        // ];
+        var sql = `delete from educations where edu_id = ${edu_id} and user_id = ${req.body.user_id}`;
 
         console.log(req.body);
 

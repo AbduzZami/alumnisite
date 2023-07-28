@@ -1,35 +1,34 @@
 const express = require("express");
 const router = express.Router();
+var connection = require("../../connection.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const connection = require("../../connection");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 router.post("/", async (req, res) => {
   try {
-    const { user_id, institute, degree, start_year, end_year } = req.body;
+    const user_id = req.body.user_id;
+    const category = req.body.category;
+    const phone_no = req.body.phone_no;
 
     if (
       user_id === undefined ||
+      category === undefined ||
+      phone_no === undefined ||
       user_id === "" ||
+      category === "" ||
+      phone_no === "" ||
       user_id === null ||
-      institute === undefined ||
-      degree === undefined ||
-      start_year === undefined ||
-      end_year === undefined ||
-      institute === "" ||
-      degree === "" ||
-      start_year === "" ||
-      end_year === "" ||
-      institute === null ||
-      degree === null ||
-      start_year === null ||
-      end_year === null
+      category === null ||
+      phone_no === null
     ) {
       res.status(500).json({
         message: "Invalid request",
       });
       return;
     }
+
     const token = req.cookies.access_token;
     console.log(req);
     if (!token) {
@@ -54,17 +53,10 @@ router.post("/", async (req, res) => {
                 message: "You are not an admin",
               });
             } else {
-              var sql = `insert into educations ( user_id, institute, degree, start_year, end_year ) values ?`;
+              console.log("Connected to the database");
+              var sql = `insert into phones ( user_id, category, phone_no ) values  ?`;
 
-              var values = [
-                [
-                  req.body.user_id,
-                  req.body.institute,
-                  req.body.degree,
-                  req.body.start_year,
-                  req.body.end_year,
-                ],
-              ];
+              var values = [[user_id, category, phone_no]];
 
               console.log(req.body);
 
@@ -75,7 +67,7 @@ router.post("/", async (req, res) => {
                   });
                 } else {
                   res.status(200).json({
-                    message: "Education added successfully",
+                    message: "phone added successfully",
                   });
                 }
               });

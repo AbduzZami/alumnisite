@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import Navbar from "../Navbar";
+import { toast } from "react-hot-toast";
 
-function EditWork() {
+function EditWork(props) {
   const [work_id, setWorkID] = useState("");
   const [company, setCompany] = useState("");
   const [designation, setDesignation] = useState("");
@@ -42,86 +43,72 @@ function EditWork() {
   //   }
   // }, []);
 
-  // async function handleAddWork() {
-  //   try {
-  //     await axios({
-  //       method: "post",
-  //       url: "/edit_profile/add_work",
-  //       baseURL: "http://localhost:8800",
-  //       data: {
-  //         company: company,
-  //         designation: designation,
-  //         start_year: start_year,
-  //         end_year: end_year,
-  //       },
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-  // async function handleUpdateWork(work_id) {
-  //   try {
-  //     await axios({
-  //       method: "patch",
-  //       url: "/edit_profile/update_work",
-  //       baseURL: "http://localhost:8800",
-  //       data: {
-  //         work_id: work_id,
-  //         company: company,
-  //         designation: designation,
-  //         start_year: start_year,
-  //         end_year: end_year,
-  //       },
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  async function handleAddWork() {
+    try {
+      await axios({
+        method: "post",
+        url: "/admin/add_work",
+        baseURL: "http://localhost:8800",
+        data: {
+          user_id: props.user.user.user_id,
+          company: company,
+          designation: designation,
+          start_year: start_year,
+          end_year: end_year,
+        },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function handleUpdateWork(work_id) {
+    try {
+      await axios({
+        method: "patch",
+        url: "/admin/update_work",
+        baseURL: "http://localhost:8800",
+        data: {
+          user_id: props.user.user.user_id,
+          work_id: work_id,
+          company: company,
+          designation: designation,
+          start_year: start_year,
+          end_year: end_year,
+        },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // async function handleDeleteWork(work_id) {
-  //   try {
-  //     await axios({
-  //       method: "delete",
-  //       url: "/edit_profile/delete_work",
-  //       baseURL: "http://localhost:8800",
-  //       data: {
-  //         work_id: work_id,
-  //       },
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  async function handleDeleteWork(work_id) {
+    try {
+      await axios({
+        method: "delete",
+        url: "/admin/delete_work",
+        baseURL: "http://localhost:8800",
+        data: { user_id: props.user.user.user_id, work_id: work_id },
+        withCredentials: true,
+      }).then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // async function handleAddWork() {
-  //   try {
-  //     await axios({
-  //       method: "post",
-  //       url: "/edit_profile/add_work",
-  //       baseURL: "http://localhost:8800",
-  //       data: {
-  //         company: company,
-  //         designation: designation,
-  //         start_year: start_year,
-  //         end_year: end_year,
-  //       },
-  //       withCredentials: true,
-  //     }).then((res) => {
-  //       console.log(res);
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
   return (
     <div className="">
       <div className="flex flex-wrap">
@@ -176,7 +163,7 @@ function EditWork() {
                       />
                     </div>
                     <button
-                      // onClick={handleAddWork}
+                      onClick={handleAddWork}
                       className=" btn btn-success m-1"
                     >
                       Add Work
@@ -194,10 +181,9 @@ function EditWork() {
 
           {
             // if alumnies is not empty or null
-            isLoading === false &&
-            userData !== null &&
-            userData !== undefined ? (
-              userData.works.map((work) => (
+
+            props.user.works !== null && props.user.works !== undefined ? (
+              props.user.works.map((work) => (
                 <div className="my-2" key={work.work_id}>
                   <p>{work.company}</p>
                   <p>{work.designation}</p>
@@ -247,7 +233,7 @@ function EditWork() {
               <h3 className="font-bold text-lg">Do you want to delete?</h3>
               <p className="py-4">
                 <button
-                  // onClick={() => handleDeleteWork(work_id)}
+                  onClick={() => handleDeleteWork(work_id)}
                   className=" btn btn-success m-1"
                 >
                   Yes
@@ -303,7 +289,7 @@ function EditWork() {
                   />
                 </div>
                 <button
-                  // onClick={() => handleUpdateWork(work_id)}
+                  onClick={() => handleUpdateWork(work_id)}
                   className=" btn btn-success m-1"
                 >
                   Update Work
