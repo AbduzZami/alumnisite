@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import SideBar from "../sidebar";
 import Navbar from "../Navbar";
+import { toast } from "react-hot-toast";
 
 function General(props) {
   const [name, setName] = useState(props.user.user.user_name);
@@ -21,6 +22,7 @@ function General(props) {
         withCredentials: true,
       }).then((res) => {
         console.log(res);
+        toast.success("Name Updated Successfully");
       });
     } catch (error) {
       console.error(error);
@@ -40,6 +42,7 @@ function General(props) {
         withCredentials: true,
       }).then((res) => {
         console.log(res);
+        toast.success("Roll Updated Successfully");
       });
     } catch (error) {
       console.error(error);
@@ -59,6 +62,7 @@ function General(props) {
         withCredentials: true,
       }).then((res) => {
         console.log(res);
+        toast.success("Headline Updated Successfully");
       });
     } catch (error) {
       console.error(error);
