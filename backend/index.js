@@ -100,6 +100,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.set("trust proxy", 1);
 app.use("/uploads", express.static("uploads"));
 
 // app.set("view engine", "hbs");
