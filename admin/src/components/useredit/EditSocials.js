@@ -20,7 +20,7 @@ function EditSocials(props) {
   //       axios({
   //         method: "get",
   //         url: `/userbyid/${currentUser.user_id}`,
-  //         baseURL: "http://localhost:8800",
+  //         baseURL: "https://alumni-backend-lavs.onrender.com/",
   //         withCredentials: true,
   //       }).then((res) => {
   //         console.log(res);
@@ -45,7 +45,7 @@ function EditSocials(props) {
       await axios({
         method: "post",
         url: "/admin/add_social",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: {
           user_id: props.user.user.user_id,
           category: category,
@@ -65,7 +65,7 @@ function EditSocials(props) {
       await axios({
         method: "patch",
         url: "/admin/update_social",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: {
           user_id: props.user.user.user_id,
           social_id: social_id,
@@ -87,7 +87,7 @@ function EditSocials(props) {
       await axios({
         method: "delete",
         url: "/admin/delete_social",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: { user_id: props.user.user.user_id, social_id: social_id },
         withCredentials: true,
       }).then((res) => {

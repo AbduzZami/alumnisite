@@ -18,7 +18,7 @@ function Profile() {
       axios({
         method: "get",
         url: `/userbyid/${id}`,
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -119,7 +119,7 @@ function Profile() {
               <div className="w-48 h-48 mx-auto rounded-full overflow-hidden sticky top-10">
                 <img
                   className="w-full h-full object-cover"
-                  src={`http://localhost:8800/${userData.user.image_url}`}
+                  src={`https://alumni-backend-lavs.onrender.com//${userData.user.image_url}`}
                   alt="User Avatar"
                 />
               </div>

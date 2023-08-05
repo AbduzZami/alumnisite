@@ -18,7 +18,7 @@ function MyPosts() {
       axios({
         method: "get",
         url: `/posts/my`,
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -70,7 +70,7 @@ function MyPosts() {
                   <tr key={index} className="border-t">
                     <td className="px-4 py-2">
                       <img
-                        src={`http://localhost:8800/${post.image_url}`}
+                        src={`https://alumni-backend-lavs.onrender.com//${post.image_url}`}
                         alt="post"
                         className="w-10 h-10 object-cover m-2 rounded-md"
                       />

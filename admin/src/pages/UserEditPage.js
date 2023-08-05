@@ -59,7 +59,7 @@ export default function UserEditPage() {
 
   React.useEffect(() => {
     axios
-      .get(`http://localhost:8800/userbyid/${id}`)
+      .get(`https://alumni-backend-lavs.onrender.com//userbyid/${id}`)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {

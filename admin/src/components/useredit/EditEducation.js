@@ -25,7 +25,7 @@ function EditEducation(props) {
   //     axios({
   //       method: "get",
   //       url: `/userbyid/${currentUser.user_id}`,
-  //       baseURL: "http://localhost:8800",
+  //       baseURL: "https://alumni-backend-lavs.onrender.com/",
   //       withCredentials: true,
   //     }).then((res) => {
   //       console.log(res);
@@ -49,7 +49,7 @@ function EditEducation(props) {
       await axios({
         method: "post",
         url: "/admin/add_education",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: {
           user_id: props.user.user.user_id,
           institute: institute,
@@ -73,7 +73,7 @@ function EditEducation(props) {
       await axios({
         method: "patch",
         url: "/admin/update_education",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: {
           user_id: props.user.user.user_id,
           edu_id: edu_id,
@@ -99,7 +99,7 @@ function EditEducation(props) {
       await axios({
         method: "delete",
         url: "/admin/delete_education",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com/",
         data: {
           user_id: props.user.user.user_id,
           edu_id: edu_id,

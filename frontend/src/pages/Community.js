@@ -18,7 +18,7 @@ function Community() {
         axios({
           method: "get",
           url: `/users`,
-          baseURL: "http://localhost:8800",
+          baseURL: "https://alumni-backend-lavs.onrender.com/",
           withCredentials: true,
         }).then((res) => {
           console.log(res);
@@ -41,11 +41,14 @@ function Community() {
     const fetchAlumni = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("http://localhost:8800/users/search", {
-          params: {
-            parameter: searchQuery,
-          },
-        });
+        const response = await axios.get(
+          "https://alumni-backend-lavs.onrender.com//users/search",
+          {
+            params: {
+              parameter: searchQuery,
+            },
+          }
+        );
         console.log(response);
         if (response.status === 200) {
           setAlumnies(response.data.data);
