@@ -61,7 +61,7 @@ function MyPosts() {
                 <th className="px-4 py-2">Headline</th>
                 <th className="px-4 py-2">Time</th>
                 <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Actions</th>
+                {/* <th className="px-4 py-2">Actions</th> */}
               </tr>
             </thead>
             <tbody>
@@ -78,7 +78,7 @@ function MyPosts() {
                     <td className="px-4 py-2">{post.title}</td>
                     <td className="px-4 py-2">{post.created_on}</td>
                     <td className="px-4 py-2">{post.status}</td>
-                    <td className="px-4 py-2">Edit</td>
+                    {/* <td className="px-4 py-2">Edit</td> */}
                   </tr>
                 ))
               ) : (

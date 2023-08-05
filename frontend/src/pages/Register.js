@@ -21,7 +21,7 @@ function RegisterPage() {
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <img
               alt="Night"
-              src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              src={require("../assets/csenight.jpg")}
               className="absolute inset-0 h-full w-full object-cover opacity-80"
             />
 
@@ -42,7 +42,7 @@ function RegisterPage() {
               </a>
 
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                Welcome to RUETians 🦑
+                Welcome to RUETians
               </h2>
 
               <p className="mt-4 leading-relaxed text-white/90">
@@ -78,12 +78,13 @@ function RegisterPage() {
                 </a>
 
                 <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                  Welcome to Squid 🦑
+                  Welcome to RUETians
                 </h1>
 
                 <p className="mt-4 leading-relaxed text-gray-500">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                  Get connected with your fellow RUETians. Ask for help, share
+                  your knowledge, and stay updated with the latest news and
+                  events. Join the RUETians community today!
                 </p>
               </div>
 
@@ -173,7 +174,7 @@ function RegisterPage() {
                   />
                 </div>
 
-                <div className="col-span-6">
+                {/* <div className="col-span-6">
                   <label htmlFor="MarketingAccept" className="flex gap-4">
                     <input
                       type="checkbox"
@@ -187,9 +188,9 @@ function RegisterPage() {
                       company announcements.
                     </span>
                   </label>
-                </div>
+                </div> */}
 
-                <div className="col-span-6">
+                {/* <div className="col-span-6">
                   <p className="text-sm text-gray-500">
                     By creating an account, you agree to our
                     <a href="#" className="text-gray-700 underline">
@@ -201,7 +202,7 @@ function RegisterPage() {
                     </a>
                     .
                   </p>
-                </div>
+                </div> */}
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                   <button
@@ -215,7 +216,7 @@ function RegisterPage() {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Already have an account?
-                    <a href="#" className="text-gray-700 underline">
+                    <a href="/signin" className="text-gray-700 underline">
                       Log in
                     </a>
                     .

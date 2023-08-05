@@ -18,6 +18,9 @@ function NewsEvents() {
         method: "get",
         url: "/posts",
         baseURL: "http://localhost:8800",
+        params: {
+          isapproved: true,
+        },
       }).then((res) => {
         console.log(res);
         if (res.status === 200) {
@@ -64,9 +67,9 @@ function NewsEvents() {
                 </div>
               )}
             </div>
-            <div className="m-2">
+            {/* <div className="m-2">
               <button className="btn btn-outline">Load More</button>
-            </div>
+            </div> */}
           </div>
           <div className="md:w-1/6 mt-5 mb-5">
             <div className="sticky top-10">

@@ -3,7 +3,11 @@ const router = express.Router();
 var connection = require("../connection.js");
 
 router.get("/", async (req, res) => {
-  var query = "select * from posts ORDER BY created_on DESC";
+  const isApproved = req.query.isapproved ?? false;
+  var query =
+    isApproved == false
+      ? "select * from posts ORDER BY created_on DESC"
+      : "select * from posts where status = 'approved' ORDER BY created_on DESC";
   const limit = req.query.limit;
   try {
     connection.query(query, function (error, results, fields) {

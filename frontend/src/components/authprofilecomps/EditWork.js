@@ -12,6 +12,7 @@ function EditWork() {
   const [designation, setDesignation] = useState("");
   const [start_year, setStartYear] = useState("");
   const [end_year, setEndYear] = useState("");
+  const [location, setLocation] = useState("");
   const [userData, setUserData] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
@@ -53,6 +54,7 @@ function EditWork() {
           designation: designation,
           start_year: start_year,
           end_year: end_year,
+          location: location,
         },
         withCredentials: true,
       }).then((res) => {
@@ -75,6 +77,7 @@ function EditWork() {
           designation: designation,
           start_year: start_year,
           end_year: end_year,
+          location: location,
         },
         withCredentials: true,
       }).then((res) => {
@@ -161,6 +164,14 @@ function EditWork() {
                         placeholder="End"
                       />
                     </div>
+                    <input
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                      }}
+                      type="text"
+                      className="w-80 input w-full input-bordered m-1"
+                      placeholder="Location"
+                    />
                     <button
                       onClick={handleAddWork}
                       className=" btn btn-success m-1"
@@ -190,6 +201,7 @@ function EditWork() {
                   <p>
                     {work.start_year} {"-"} {work.end_year}
                   </p>
+                  <p>{work.location}</p>
                   <div className="flex flex-wrap gap-2">
                     <div>
                       <p
@@ -201,6 +213,7 @@ function EditWork() {
                           setDesignation(work.designation);
                           setStartYear(work.start_year);
                           setEndYear(work.end_year);
+                          setLocation(work.location);
                           window.my_modal_edit_work.showModal();
                         }}
                       >
@@ -288,6 +301,15 @@ function EditWork() {
                     placeholder="End"
                   />
                 </div>
+                <input
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  type="text"
+                  value={location}
+                  className="w-80 input w-full input-bordered m-1"
+                  placeholder="Location"
+                />
                 <button
                   onClick={() => handleUpdateWork(work_id)}
                   className=" btn btn-success m-1"

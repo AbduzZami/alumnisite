@@ -23,6 +23,7 @@ function NormProfile(props) {
                     <p>
                       {work.start_date} - {work.end_date}
                     </p>
+                    <p className="text-gray-600">{work.location}</p>
                   </div>
                 );
               })}

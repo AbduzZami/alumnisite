@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/", (req, res) => {
   try {
     // Clear the access_token cookie to log the user out
-    res.clearCookie("access_token").status(200).json({
+    res.clearCookie("access_token_admin").status(200).json({
       message: "Logout successful",
     });
   } catch (error) {

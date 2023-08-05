@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 
             const { password, ...rest } = results[0];
             res
-              .cookie("access_token", token, {
+              .cookie("access_token_admin", token, {
                 httpOnly: true,
               })
               .status(200)

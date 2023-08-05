@@ -23,40 +23,51 @@ import EditSocials from "./components/authprofilecomps/EditSocials";
 import RequireAuth from "./contexts/RequireAuth";
 import EditPhones from "./components/authprofilecomps/EditPhone";
 import EditEmail from "./components/authprofilecomps/EditEmail";
+import { useLocation } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
+const Wrapper = ({ children }) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children;
+};
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="*" element={<Error />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/newsevents" element={<NewsEvents />} />
-        <Route path="/signin" element={<LoginPage />} />
-        <Route path="/signup" element={<RegisterPage />} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/editprofile" element={<PublicView />} />
-          <Route path="/editprofile/publicview" element={<PublicView />} />
-          <Route
-            path="/editprofile/general"
-            element={<PersonalInformation />}
-          />
-          <Route path="/editprofile/editwork" element={<EditWork />} />
-          <Route
-            path="/editprofile/editeducation"
-            element={<EditEducation />}
-          />
-          <Route path="/editprofile/editsocials" element={<EditSocials />} />
-          <Route path="/editprofile/editphones" element={<EditPhones />} />
-          <Route path="/editprofile/editemails" element={<EditEmail />} />
-          <Route path="/editprofile/myposts" element={<MyPosts />} />
-        </Route>
-        <Route path="/newsevents/createpost" element={<PostNews />} />
-        <Route path="/newsevents/:post_id" element={<NewsEventDetails />} />
-      </Routes>
-      <Toaster />
-    </div>
+    <Wrapper>
+      <div>
+        <Routes>
+          <Route path="*" element={<Error />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/newsevents" element={<NewsEvents />} />
+          <Route path="/signin" element={<LoginPage />} />
+          <Route path="/signup" element={<RegisterPage />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/editprofile" element={<PublicView />} />
+            <Route path="/editprofile/publicview" element={<PublicView />} />
+            <Route
+              path="/editprofile/general"
+              element={<PersonalInformation />}
+            />
+            <Route path="/editprofile/editwork" element={<EditWork />} />
+            <Route
+              path="/editprofile/editeducation"
+              element={<EditEducation />}
+            />
+            <Route path="/editprofile/editsocials" element={<EditSocials />} />
+            <Route path="/editprofile/editphones" element={<EditPhones />} />
+            <Route path="/editprofile/editemails" element={<EditEmail />} />
+            <Route path="/editprofile/myposts" element={<MyPosts />} />
+          </Route>
+          <Route path="/newsevents/createpost" element={<PostNews />} />
+          <Route path="/newsevents/:post_id" element={<NewsEventDetails />} />
+        </Routes>
+        <Toaster />
+      </div>
+    </Wrapper>
   );
 }
 

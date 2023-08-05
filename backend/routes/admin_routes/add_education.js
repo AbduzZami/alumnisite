@@ -6,7 +6,8 @@ const connection = require("../../connection");
 
 router.post("/", async (req, res) => {
   try {
-    const { user_id, institute, degree, start_year, end_year } = req.body;
+    const { user_id, institute, degree, start_year, end_year, location } =
+      req.body;
 
     if (
       user_id === undefined ||
@@ -23,14 +24,17 @@ router.post("/", async (req, res) => {
       institute === null ||
       degree === null ||
       start_year === null ||
-      end_year === null
+      end_year === null ||
+      location === undefined ||
+      location === "" ||
+      location === null
     ) {
       res.status(500).json({
         message: "Invalid request",
       });
       return;
     }
-    const token = req.cookies.access_token;
+    const token = req.cookies.access_token_admin;
     console.log(req);
     if (!token) {
       res.status(401).json({
@@ -54,7 +58,7 @@ router.post("/", async (req, res) => {
                 message: "You are not an admin",
               });
             } else {
-              var sql = `insert into educations ( user_id, institute, degree, start_year, end_year ) values ?`;
+              var sql = `insert into educations ( user_id, institute, degree, start_year, end_year, location ) values ?`;
 
               var values = [
                 [
@@ -63,6 +67,7 @@ router.post("/", async (req, res) => {
                   req.body.degree,
                   req.body.start_year,
                   req.body.end_year,
+                  req.body.location,
                 ],
               ];
 

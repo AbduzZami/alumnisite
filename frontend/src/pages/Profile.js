@@ -61,6 +61,7 @@ function Profile() {
                     <p className="text-gray-600">
                       {work.start_year} - {work.end_year}
                     </p>
+                    <p className="text-gray-600">{work.location}</p>
                   </div>
                 ))}
               </section>
@@ -75,6 +76,7 @@ function Profile() {
                     <p className="text-gray-600">
                       {education.start_year} - {education.end_year}
                     </p>
+                    <p className="text-gray-600">{education.location}</p>
                   </div>
                 ))}
               </section>

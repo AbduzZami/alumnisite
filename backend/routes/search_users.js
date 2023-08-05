@@ -5,21 +5,26 @@ const router = express.Router();
 var connection = require("../connection.js");
 
 router.get("/", async (req, res) => {
-  var query = `SELECT DISTINCT u.user_id, u.user_name, u.email, u.roll_no, u.verification_status, u.image_url, h.headline FROM users u LEFT JOIN user_headline h ON u.user_id = h.user_id LEFT JOIN socials s ON u.user_id = s.user_id LEFT JOIN phones p ON u.user_id = p.user_id LEFT JOIN emails e ON u.user_id = e.user_id LEFT JOIN works w ON u.user_id = w.user_id LEFT JOIN educations ed ON u.user_id = ed.user_id WHERE u.user_name LIKE '%${req.query.parameter}%' OR h.headline LIKE '%${req.query.parameter}%' OR s.category LIKE '%${req.query.parameter}%' OR s.link LIKE '%${req.query.parameter}%' OR p.category LIKE '%${req.query.parameter}%' OR p.phone_no LIKE '%${req.query.parameter}%' OR e.category LIKE '%${req.query.parameter}%' OR e.email LIKE '%${req.query.parameter}%' OR w.company LIKE '%${req.query.parameter}%' OR w.designation LIKE '%${req.query.parameter}%' OR ed.institute LIKE '%${req.query.parameter}%' OR ed.degree LIKE '%${req.query.parameter}%';`;
+  var query = `SELECT DISTINCT u.user_id, u.user_name, u.email, u.roll_no, u.verification_status, u.image_url, h.headline FROM users u LEFT JOIN user_headline h ON u.user_id = h.user_id LEFT JOIN socials s ON u.user_id = s.user_id LEFT JOIN phones p ON u.user_id = p.user_id LEFT JOIN emails e ON u.user_id = e.user_id LEFT JOIN works w ON u.user_id = w.user_id LEFT JOIN educations ed ON u.user_id = ed.user_id WHERE  LOWER(u.user_name) LIKE LOWER(?) OR LOWER(h.headline) LIKE LOWER(?) OR LOWER(s.category) LIKE LOWER(?) OR LOWER(s.link) LIKE LOWER(?) OR LOWER(p.category) LIKE LOWER(?) OR LOWER(p.phone_no) LIKE LOWER(?) OR LOWER(e.category) LIKE LOWER(?) OR LOWER(e.email) LIKE LOWER(?) OR LOWER(w.company) LIKE LOWER(?) OR LOWER(w.designation) LIKE LOWER(?) OR LOWER(w.location) LIKE LOWER(?) OR LOWER(ed.institute) LIKE LOWER(?) OR LOWER(ed.degree) LIKE LOWER(?) OR LOWER(ed.location) LIKE LOWER(?);`;
+  const parameter = `%${req.query.parameter}%`;
   try {
-    connection.query(query, function (error, results, fields) {
-      if (error) {
-        res.status(500).json({
-          message: error.sqlMessage,
-          data: null,
-        });
-      } else {
-        res.status(200).json({
-          message: "Success",
-          data: results,
-        });
+    connection.query(
+      query,
+      Array(14).fill(parameter),
+      function (error, results, fields) {
+        if (error) {
+          res.status(500).json({
+            message: error.sqlMessage,
+            data: null,
+          });
+        } else {
+          res.status(200).json({
+            message: "Success",
+            data: results,
+          });
+        }
       }
-    });
+    );
   } catch (error) {
     console.log(error);
     res.status(500).json({

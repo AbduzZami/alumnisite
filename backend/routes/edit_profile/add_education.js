@@ -9,6 +9,7 @@ router.post("/", async (req, res) => {
   const degree = req.body.degree;
   const start_year = req.body.start_year;
   const end_year = req.body.end_year;
+  const location = req.body.location;
 
   if (
     institute === undefined ||
@@ -22,7 +23,10 @@ router.post("/", async (req, res) => {
     institute === null ||
     degree === null ||
     start_year === null ||
-    end_year === null
+    end_year === null ||
+    location === undefined ||
+    location === "" ||
+    location === null
   ) {
     res.status(500).json({
       message: "Invalid request",
@@ -46,7 +50,7 @@ router.post("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `insert into educations ( user_id, institute, degree, start_year, end_year ) values ?`;
+        var sql = `insert into educations ( user_id, institute, degree, start_year, end_year, location ) values ?`;
 
         var values = [
           [
@@ -55,6 +59,7 @@ router.post("/", async (req, res) => {
             req.body.degree,
             req.body.start_year,
             req.body.end_year,
+            req.body.location,
           ],
         ];
 

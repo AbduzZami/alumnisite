@@ -12,6 +12,7 @@ function EditEducation() {
   const [degree, setdegree] = useState("");
   const [start_year, setStartYear] = useState("");
   const [end_year, setEndYear] = useState("");
+  const [location, setLocation] = useState("");
   const [userData, setUserData] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
@@ -54,6 +55,7 @@ function EditEducation() {
           degree: degree,
           start_year: start_year,
           end_year: end_year,
+          location: location,
         },
         withCredentials: true,
       }).then((res) => {
@@ -76,6 +78,7 @@ function EditEducation() {
           degree: degree,
           start_year: start_year,
           end_year: end_year,
+          location: location,
         },
         withCredentials: true,
       }).then((res) => {
@@ -162,6 +165,14 @@ function EditEducation() {
                         placeholder="End"
                       />
                     </div>
+                    <input
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                      }}
+                      type="text"
+                      className="w-80 input w-full input-bordered m-1"
+                      placeholder="Location"
+                    />
                     <button
                       onClick={handleAddEducation}
                       className=" btn btn-success m-1"
@@ -191,6 +202,7 @@ function EditEducation() {
                   <p>
                     {edu.start_year} {"-"} {edu.end_year}
                   </p>
+                  <p>{edu.location}</p>
                   <div className="flex flex-wrap gap-2">
                     <div>
                       <p
@@ -202,6 +214,7 @@ function EditEducation() {
                           setdegree(edu.degree);
                           setStartYear(edu.start_year);
                           setEndYear(edu.end_year);
+                          setLocation(edu.location);
                           window.my_modal_edit_edu.showModal();
                         }}
                       >
@@ -289,6 +302,14 @@ function EditEducation() {
                     placeholder="End"
                   />
                 </div>
+                <input
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  type="text"
+                  className="w-80 input w-full input-bordered m-1"
+                  placeholder="Location"
+                />
                 <button
                   onClick={() => handleUpdateEducation(edu_id)}
                   className=" btn btn-success m-1"

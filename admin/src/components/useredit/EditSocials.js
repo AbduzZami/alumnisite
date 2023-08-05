@@ -149,7 +149,7 @@ function EditSocials(props) {
                       }}
                       type="text"
                       className="w-80 input w-full input-bordered m-1"
-                      placeholder="degree"
+                      placeholder="Link"
                     />
 
                     <button
@@ -258,7 +258,7 @@ function EditSocials(props) {
                   value={link}
                   type="text"
                   className="w-80 input w-full input-bordered m-1"
-                  placeholder="degree"
+                  placeholder="Link"
                 />
                 <button
                   onClick={() => handleUpdateSocial(social_id)}

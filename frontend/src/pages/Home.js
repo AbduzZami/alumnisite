@@ -25,6 +25,7 @@ function Home() {
         baseURL: "http://localhost:8800",
         params: {
           limit: 5,
+          isapproved: true,
         },
       }).then((res) => {
         console.log(res);
@@ -73,7 +74,7 @@ function Home() {
                 <div class="relative h-64 sm:h-80 lg:h-full">
                   <img
                     alt="House"
-                    src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                    src={require("../assets/ruetgate.jpg")}
                     class="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
@@ -88,10 +89,12 @@ function Home() {
                   </h2>
 
                   <p class="mt-4 text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquid, molestiae! Quidem est esse numquam odio deleniti,
-                    beatae, magni dolores provident quaerat totam eos, aperiam
-                    architecto eius quis quibusdam fugiat dicta.
+                    The RUET alumni association is a community for former
+                    students of Rajshahi University of Engineering & Technology
+                    (RUET). The association provides a platform for alumni to
+                    connect with each other, share their experiences, and stay
+                    up-to-date with the latest news and events at RUET. Are you
+                    an alumnus of RUET? 😊
                   </p>
 
                   <button class="mt-8 btn btn-neutral">Get in Touch</button>
@@ -160,7 +163,7 @@ function Home() {
               }}
             />
 
-            {isLoaded ? (
+            {isLoaded && posts[0] != null ? (
               <TheLatestCard post={posts[0]} />
             ) : (
               <div className="flex justify-center items-center">

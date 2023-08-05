@@ -120,6 +120,7 @@ function PersonalInformation() {
         withCredentials: true,
       }).then((res) => {
         console.log(res);
+        toast(res.data.message);
       });
     } catch (error) {
       console.error(error);

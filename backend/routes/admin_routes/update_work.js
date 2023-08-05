@@ -5,7 +5,15 @@ const bcrypt = require("bcryptjs");
 const connection = require("../../connection");
 
 router.patch("/", async (req, res) => {
-  const { user_id, company, designation, start_year, end_year } = req.body;
+  const {
+    user_id,
+    work_id,
+    company,
+    designation,
+    start_year,
+    end_year,
+    location,
+  } = req.body;
 
   if (
     user_id === undefined ||
@@ -22,7 +30,13 @@ router.patch("/", async (req, res) => {
     company === null ||
     designation === null ||
     start_year === null ||
-    end_year === null
+    end_year === null ||
+    location === undefined ||
+    location === "" ||
+    location === null ||
+    work_id === undefined ||
+    work_id === "" ||
+    work_id === null
   ) {
     res.status(500).json({
       message: "Invalid request",
@@ -30,7 +44,7 @@ router.patch("/", async (req, res) => {
     return;
   }
   try {
-    const token = req.cookies.access_token;
+    const token = req.cookies.access_token_admin;
     if (!token) {
       res.status(401).json({
         message: "Unauthorized Access",
@@ -46,7 +60,7 @@ router.patch("/", async (req, res) => {
         return;
       } else {
         console.log("Connected to the database");
-        var sql = `update works set company = '${company}' , designation = '${designation}' , start_year = '${start_year}', end_year = '${end_year}' where works.work_id = ${work_id} and works.user_id = ${req.body.user_id}`;
+        var sql = `update works set company = '${company}' , designation = '${designation}' , start_year = '${start_year}', end_year = '${end_year}', location = '${location}' where works.work_id = ${work_id} and works.user_id = ${req.body.user_id}`;
 
         console.log(req.body);
 

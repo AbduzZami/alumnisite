@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
       });
       return;
     }
-    const token = req.cookies.access_token;
+    const token = req.cookies.access_token_admin;
     console.log(req);
     if (!token) {
       res.status(401).json({
