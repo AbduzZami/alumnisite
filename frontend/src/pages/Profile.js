@@ -119,7 +119,7 @@ function Profile() {
               <div className="w-48 h-48 mx-auto rounded-full overflow-hidden sticky top-10">
                 <img
                   className="w-full h-full object-cover"
-                  src={`https://alumni-backend-lavs.onrender.com//${userData.user.image_url}`}
+                  src={`https://alumni-backend-lavs.onrender.com/${userData.user.image_url}`}
                   alt="User Avatar"
                 />
               </div>

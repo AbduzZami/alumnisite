@@ -42,7 +42,7 @@ function Community() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          "https://alumni-backend-lavs.onrender.com//users/search",
+          "https://alumni-backend-lavs.onrender.com/users/search",
           {
             params: {
               parameter: searchQuery,

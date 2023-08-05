@@ -78,7 +78,7 @@ function Navbar() {
                   <div className="avatar">
                     <div className="rounded-full w-10 h-10 m-1">
                       <img
-                        src={`http://localhost:8800/${currentUser.image_url}`}
+                        src={`https://alumni-backend-lavs.onrender.com/${currentUser.image_url}`}
                         alt="img"
                       />
                     </div>

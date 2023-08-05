@@ -17,7 +17,7 @@ function NewsEvents() {
       axios({
         method: "get",
         url: "/posts",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         params: {
           isapproved: true,
         },

@@ -70,7 +70,7 @@ function MyPosts() {
                   <tr key={index} className="border-t">
                     <td className="px-4 py-2">
                       <img
-                        src={`https://alumni-backend-lavs.onrender.com//${post.image_url}`}
+                        src={`https://alumni-backend-lavs.onrender.com/${post.image_url}`}
                         alt="post"
                         className="w-10 h-10 object-cover m-2 rounded-md"
                       />

@@ -20,7 +20,7 @@ function PostNews() {
       await axios({
         method: "post",
         url: "/add_post", // Assuming this is the correct API endpoint on the backend
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: formData,
         withCredentials: true,
         headers: {

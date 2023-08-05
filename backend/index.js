@@ -86,6 +86,14 @@ app.use(
     ],
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
+    optionSuccessStatus: 200,
+    Headers: true,
+    exposedHeaders: "Set-Cookie",
+    allowedHeaders: [
+      "Access-Control-Allow-Origin",
+      "Content-Type",
+      "Authorization",
+    ],
   })
 );
 // app.use(cors());

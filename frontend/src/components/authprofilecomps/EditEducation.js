@@ -24,7 +24,7 @@ function EditEducation() {
       axios({
         method: "get",
         url: `/userbyid/${currentUser.user_id}`,
-        baseURL: "https://alumni-backend-lavs.onrender.com/",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -49,7 +49,7 @@ function EditEducation() {
       await axios({
         method: "post",
         url: "/edit_profile/add_education",
-        baseURL: "https://alumni-backend-lavs.onrender.com/",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           institute: institute,
           degree: degree,
@@ -71,7 +71,7 @@ function EditEducation() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_education",
-        baseURL: "https://alumni-backend-lavs.onrender.com/",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           edu_id: edu_id,
           institute: institute,
@@ -95,7 +95,7 @@ function EditEducation() {
       await axios({
         method: "delete",
         url: "/edit_profile/delete_education",
-        baseURL: "https://alumni-backend-lavs.onrender.com/",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           edu_id: edu_id,
         },

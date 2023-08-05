@@ -24,7 +24,7 @@ function EditWork() {
       axios({
         method: "get",
         url: `/userbyid/${currentUser.user_id}`,
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -48,7 +48,7 @@ function EditWork() {
       await axios({
         method: "post",
         url: "/edit_profile/add_work",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           company: company,
           designation: designation,
@@ -70,7 +70,7 @@ function EditWork() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_work",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           work_id: work_id,
           company: company,
@@ -94,7 +94,7 @@ function EditWork() {
       await axios({
         method: "delete",
         url: "/edit_profile/delete_work",
-        baseURL: "http://localhost:8800",
+        baseURL: "https://alumni-backend-lavs.onrender.com",
         data: {
           work_id: work_id,
         },
