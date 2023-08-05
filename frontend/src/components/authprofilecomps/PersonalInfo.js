@@ -25,7 +25,7 @@ function PersonalInformation() {
       axios({
         method: "get",
         url: `/userbyid/${currentUser.user_id}`,
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -55,7 +55,7 @@ function PersonalInformation() {
       await axios({
         method: "post",
         url: "/edit_profile/set_image", // Assuming this is the correct API endpoint on the backend
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: formData,
         withCredentials: true,
         headers: {
@@ -77,7 +77,7 @@ function PersonalInformation() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_name",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           user_name: name,
         },
@@ -95,7 +95,7 @@ function PersonalInformation() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_roll",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           roll_no: roll_no,
         },
@@ -113,7 +113,7 @@ function PersonalInformation() {
       await axios({
         method: "patch",
         url: "/edit_profile/set_headline",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           headline: headline,
         },

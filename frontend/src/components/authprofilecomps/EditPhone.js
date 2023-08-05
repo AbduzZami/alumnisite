@@ -21,7 +21,7 @@ function EditPhones() {
       axios({
         method: "get",
         url: `/userbyid/${currentUser.user_id}`,
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -46,7 +46,7 @@ function EditPhones() {
       await axios({
         method: "post",
         url: "/edit_profile/add_phone",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           category: category,
           phone_no: phone_no,
@@ -65,7 +65,7 @@ function EditPhones() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_phone",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           phone_id: phone_id,
           category: category,
@@ -86,7 +86,7 @@ function EditPhones() {
       await axios({
         method: "delete",
         url: "/edit_profile/delete_phone",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           phone_id: phone_id,
         },

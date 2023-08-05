@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 function ChangeStatus(props) {
   const [selectedStatus, setSelectedStatus] = useState("Pending");
@@ -22,6 +23,7 @@ function ChangeStatus(props) {
         withCredentials: true,
       }).then((res) => {
         console.log(res);
+        toast(res.data.message);
       });
     } catch (error) {
       console.error(error);

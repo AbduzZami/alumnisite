@@ -22,7 +22,7 @@ function CommunityCard(props) {
             <div class="hidden sm:block sm:shrink-0">
               <img
                 alt={props.user.user_name}
-                src={`https://alumni-backend-lavs.onrender.com/${props.user.image_url}`}
+                src={`http://localhost:8800/${props.user.image_url}`}
                 class="h-16 w-16 rounded-lg object-cover shadow-sm"
               />
             </div>

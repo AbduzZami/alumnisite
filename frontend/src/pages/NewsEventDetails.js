@@ -13,7 +13,7 @@ function NewsEventDetails() {
   useEffect(() => {
     setIsLoading(true); // Set loading to true before making the Axios request.
     axios
-      .get(`https://alumni-backend-lavs.onrender.com/post`, {
+      .get(`http://localhost:8800/post`, {
         params: {
           post_id: post_id,
         },
@@ -61,7 +61,7 @@ function NewsEventDetails() {
                 <div class="relative h-64 overflow-hidden sm:h-80 lg:h-full">
                   <img
                     alt="Party"
-                    src={`https://alumni-backend-lavs.onrender.com/${post.image_url}`}
+                    src={`http://localhost:8800/${post.image_url}`}
                     class="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>

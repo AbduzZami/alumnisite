@@ -9,7 +9,7 @@ function NewsCard(props) {
           <img
             alt="team"
             class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-md mr-4"
-            src={`https://alumni-backend-lavs.onrender.com/${props.post.image_url}`}
+            src={`http://localhost:8800/${props.post.image_url}`}
           />
           <div class="flex-grow">
             <h2 class="text-gray-900 title-font font-medium">

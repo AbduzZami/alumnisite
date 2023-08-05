@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       axios({
         method: "post",
         url: "/login",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           email: email,
           password: password,
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       axios({
         method: "post",
         url: "/register",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           user_name: user_name,
           email: email,
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
       axios({
         method: "post",
         url: "/logout",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
       }).then((res) => {
         console.log(res);
         if (res.status === 200) {
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
         axios({
           method: "get",
           url: `/userbyid/${currentUser.user_id}`,
-          baseURL: "https://alumni-backend-lavs.onrender.com",
+          baseURL: "http://localhost:8800",
         }).then((res) => {
           console.log(res);
           if (res.status === 200) {
@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }) => {
         axios({
           method: "get",
           url: `/userbyid/${currentUser.user_id}`,
-          baseURL: "https://alumni-backend-lavs.onrender.com",
+          baseURL: "http://localhost:8800",
         }).then((res) => {
           console.log(res);
           if (res.status === 200) {

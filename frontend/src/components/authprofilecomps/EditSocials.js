@@ -21,7 +21,7 @@ function EditSocials() {
       axios({
         method: "get",
         url: `/userbyid/${currentUser.user_id}`,
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         withCredentials: true,
       }).then((res) => {
         console.log(res);
@@ -46,7 +46,7 @@ function EditSocials() {
       await axios({
         method: "post",
         url: "/edit_profile/add_social",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           category: category,
           link: link,
@@ -65,7 +65,7 @@ function EditSocials() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_social",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           social_id: social_id,
           category: category,
@@ -86,7 +86,7 @@ function EditSocials() {
       await axios({
         method: "delete",
         url: "/edit_profile/delete_social",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           social_id: social_id,
         },

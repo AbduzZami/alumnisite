@@ -46,7 +46,7 @@ function EditEmail() {
       await axios({
         method: "post",
         url: "/edit_profile/add_email",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           category: category,
           email: email,
@@ -65,7 +65,7 @@ function EditEmail() {
       await axios({
         method: "patch",
         url: "/edit_profile/update_email",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           email_id: email_id,
           category: category,
@@ -86,7 +86,7 @@ function EditEmail() {
       await axios({
         method: "delete",
         url: "/edit_profile/delete_email",
-        baseURL: "https://alumni-backend-lavs.onrender.com",
+        baseURL: "http://localhost:8800",
         data: {
           email_id: email_id,
         },

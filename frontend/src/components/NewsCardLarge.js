@@ -8,7 +8,7 @@ function NewsCardLarge(props) {
         <article class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm w-full">
           <img
             alt="Office"
-            src={`https://alumni-backend-lavs.onrender.com/${props.post.image_url}`}
+            src={`http://localhost:8800/${props.post.image_url}`}
             class="h-56 w-full object-cover"
           />
 
